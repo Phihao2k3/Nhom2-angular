@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'basic-example-data',
@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
   `,
 })
 export class productlistComponent {
+
   settings = {
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
@@ -120,4 +121,5 @@ export class productlistComponent {
       stock_quantity: 0,
     },
   ];
+
 }
