@@ -5,7 +5,8 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { categoriesRoutingModule, routedComponents } from './categories-routing.module';
-import { FsIconComponent } from './list-categories/categories-list.compoment';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CategoriesAddComponent } from './add-categories/categories-add.compoment';
 
 @NgModule({
   imports: [
@@ -22,11 +23,16 @@ import { FsIconComponent } from './list-categories/categories-list.compoment';
     NbDatepickerModule,
     NbRadioModule,
     NbSelectModule,
-    NbUserModule
+    NbUserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    
+    
+
   ],
   declarations: [
     ...routedComponents,
-    FsIconComponent,
+    CategoriesAddComponent
   ],
 })
 export class categoriesModule { }
