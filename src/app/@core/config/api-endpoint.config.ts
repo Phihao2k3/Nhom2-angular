@@ -9,4 +9,12 @@ export const API_ENDPOINT: IAPIEndpoint = {
     login: '/auth/login',
     logout: '/auth/logout',
   },
+  categories: {
+    base: API_BASE_URL + '/' + 'productcate',
+    list: '/productcate/',
+    create: '/productcate/',
+    update: '/productcate/',
+    delete: '/productcate/',
+    detail: '/productcate/',
+  },
 };
