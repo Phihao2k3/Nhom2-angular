@@ -12,14 +12,14 @@ import {API_BASE_URL, API_ENDPOINT} from "../../config/api-endpoint.config";
 import {UserInfoModel} from "../../model/user-info.model";
 import {LOCALSTORAGE_KEY} from "../../config";
 
-@Injectable({
+@Injectable({ 
   providedIn: 'root',
 })
 export class AuthService extends ApiService {
 
   private loginInfo: ILogin;
   private alertMessages: IAlertMessage;
-  private jwtHelperService = new JwtHelperService();
+  private jwtHelperService = new JwtHelperService(); 
 
   constructor(
       private _http: HttpClient,
@@ -31,7 +31,7 @@ export class AuthService extends ApiService {
 
   login(form: ILogin): Observable<any>  {
     return this.post<any>(API_BASE_URL + API_ENDPOINT.auth.login, {
-      idLogin: form.email.trim(),
+      username: form.email.trim(),
       password: form.password,
     });
   }
@@ -120,5 +120,6 @@ export class AuthService extends ApiService {
 
   override getToken() {
     return this.localStorageService.getItem<any>(LOCALSTORAGE_KEY.token);
+  
   }
 }
