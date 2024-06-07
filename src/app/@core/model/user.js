@@ -59,5 +59,17 @@ class users {
       );
     });
   }
+  static login(data) {
+    return new Promise((resolve, reject) => {
+      db.query(
+        "SELECT * FROM users WHERE username = ? AND password = ?",
+        [data.username, data.password],
+        function (error, results, fields) {
+          if (error) throw error;
+          resolve(results);
+        }
+      );
+    });
+  }
 }
 module.exports = users;
