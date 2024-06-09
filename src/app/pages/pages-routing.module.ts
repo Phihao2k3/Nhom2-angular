@@ -2,43 +2,58 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
-import { DashboardComponent } from "./dashboard/dashboard.component";
+import { DashboardComponent } from './dashboard/dashboard.component';
 
-const routes: Routes = [{
-  path: '',
-  component: PagesComponent,
-  children: [
-    {
-      path: 'dashboard',
-      component: DashboardComponent,
-      data: { breadcrumb: 'Dashboard' },
-    },
-    {
-      path: 'user',
-      loadChildren: () => import("./user/user.module").then(m => m.UserModule)
-    },
-    {
-      path: 'product',
-      loadChildren: () => import("./product/product.module").then(m => m.ProductModule)
-    },
-    {
-      path: 'order',
-      loadChildren: () => import("./order/order.module").then(m => m.OrderModule)
-    },
-    {
-      path: 'categories',
-      loadChildren: () => import("./categories/categories.module").then(m => m.categoriesModule)
-    },
-    {
-      path: 'store-inventory',
-      loadChildren: () => import("./store-inventory/store_inventory.module").then(m => m.store_inventoryModule)
-    },
-  ],
-}];
+const routes: Routes = [
+  {
+    path: '',
+    component: PagesComponent,
+    children: [
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        data: { breadcrumb: 'Dashboard' },
+      },
+      {
+        path: 'user',
+        loadChildren: () =>
+          import('./user/user.module').then((m) => m.UserModule),
+      },
+      {
+        path: 'product',
+        loadChildren: () =>
+          import('./product/product.module').then((m) => m.ProductModule),
+      },
+      {
+        path: 'order',
+        loadChildren: () =>
+          import('./order/order.module').then((m) => m.OrderModule),
+      },
+      {
+        path: 'categories',
+        loadChildren: () =>
+          import('./categories/categories.module').then(
+            (m) => m.categoriesModule
+          ),
+      },
+      {
+        path: 'store-inventory',
+        loadChildren: () =>
+          import('./store-inventory/store_inventory.module').then(
+            (m) => m.store_inventoryModule
+          ),
+      },
+      {
+        path: 'employees',
+        loadChildren: () =>
+          import('./employees/employees.module').then((m) => m.employeesModule),
+      },
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PagesRoutingModule {
-}
+export class PagesRoutingModule {}
