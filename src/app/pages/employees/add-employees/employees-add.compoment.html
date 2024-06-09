@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-header>Thêm loại sản phẩm</nb-card-header>
+      <nb-card-body>
+        <form [formGroup]="formEmployees" (ngSubmit)="onSubmit()">
+          <input type="text" class="mt-3" nbInput fullWidth placeholder="Tên" formControlName="employees_ten">
+
+          <input type="text" class="mt-3" nbInput fullWidth placeholder="Họ" formControlName="employees_ho">
+
+          <input type="text" class="mt-3" nbInput fullWidth placeholder="Email" formControlName="employees_email">
+          
+          <input type="number" class="mt-3" nbInput fullWidth placeholder="Phone" formControlName="employees_phone">
+
+          <input type="date" class="mt-3" nbInput fullWidth placeholder="Ngày thuê" formControlName="employees_ngaythue">
+
+          <input type="text" class="mt-3" nbInput fullWidth placeholder="Công việc" formControlName="employees_congviec">
+          
+          <input type="number" class="mt-3" nbInput fullWidth placeholder="Lương" formControlName="employees_luong">
+
+          
+          
+
+
+         
+
+
+
+
+
+
+          
+          <button class="mt-3 btn btn-success" type="submit">
+            Thêm
+          </button>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+
+
+  
