@@ -9,7 +9,7 @@ import {
   NbGlobalPhysicalPosition,
 } from '@nebular/theme';
 import { IProduct } from 'app/@core/interfaces/product.interface';
-
+import { CategoriesService } from 'app/@core/services/apis/categories.service';
 @Component({
   selector: 'app-update-product',
   templateUrl: './update-product.component.html',
@@ -20,25 +20,16 @@ export class UpdateProductComponent implements OnInit {
   file: File | null = null;
   id: number;
   product: IProduct;
-  category = [
-    { id: 1, name: 'Drama' },
-    { id: 2, name: 'Action' },
-    { id: 3, name: 'Comedy' },
-    { id: 4, name: 'Drama' },
-    { id: 5, name: 'Fantasy' },
-    { id: 6, name: 'Horror' },
-    { id: 7, name: 'Mystery' },
-    { id: 8, name: 'Romance' },
-    { id: 9, name: 'Thriller' },
-    { id: 10, name: 'Western' },
-  ];
+  categories: [] = [];
 
   constructor(
     private serviceproduct: ProductService,
     private activatedRoute: ActivatedRoute,
     private spinner: SpinnerService,
-    private toastrService: NbToastrService
+    private toastrService: NbToastrService,
+    private servicecategory: CategoriesService
   ) {
+    this.getallCategories()
     this.id = this.activatedRoute.snapshot.params.id;
 
     this.formeditproduct = new FormGroup({
@@ -68,7 +59,7 @@ export class UpdateProductComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   formatDate(date: string): string {
     const d = new Date(date);
@@ -151,5 +142,15 @@ export class UpdateProductComponent implements OnInit {
       status,
       position: NbGlobalPhysicalPosition.TOP_RIGHT,
     });
+  }
+  getallCategories() {
+    this.servicecategory.getallCategories().subscribe(
+      (res) => {
+        this.categories = res.productcate;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }

@@ -9,7 +9,8 @@
             <nb-card-header>Tên sản phẩm</nb-card-header>
             <nb-card-body>
               <input type="text" nbInput fullWidth placeholder="Tên sản phẩm" formControlName="title">
-              <span *ngIf="formeditproduct.get('title').invalid && formeditproduct.get('title').touched" class="text-danger">Tên sản phẩm không được để trống</span>
+              <span *ngIf="formeditproduct.get('title').invalid && formeditproduct.get('title').touched"
+                class="text-danger">Tên sản phẩm không được để trống</span>
             </nb-card-body>
           </nb-card>
 

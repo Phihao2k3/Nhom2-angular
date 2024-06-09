@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { NbCardModule, NbIconModule, NbInputModule, NbTreeGridModule, NbActionsModule,
-    NbButtonModule,NbCheckboxModule, NbDatepickerModule,NbRadioModule,NbSelectModule,NbUserModule} from '@nebular/theme';
+         NbButtonModule,NbCheckboxModule, NbDatepickerModule,NbRadioModule,NbSelectModule,NbUserModule} from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { UserRoutingModule, routedComponents } from './user-routing.module';
 // import { FsIconComponent } from './list-user/list-user.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -22,7 +23,9 @@ import { UserRoutingModule, routedComponents } from './user-routing.module';
     NbDatepickerModule,
     NbRadioModule,
     NbSelectModule,
-    NbUserModule
+    NbUserModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     ...routedComponents,

@@ -1,4 +1,13 @@
 import { Component } from '@angular/core';
+import { OrderService } from 'app/@core/services/apis/order.service';
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'; // Sử dụng FormBuilder để tạo FormGroup
+import { UserService } from 'app/@core/services/apis/user.service';
+import {
+  NbToastrService,
+  NbComponentStatus,
+  NbGlobalPhysicalPosition,
+} from '@nebular/theme';
 
 @Component({
   selector: 'app-addorder',
@@ -6,30 +15,64 @@ import { Component } from '@angular/core';
   styleUrls: ['./addorder.component.scss']
 })
 export class AddorderComponent {
-  newOrder: any = {
-    productName: '',
-    category: '',
-    price: null,
-    quantity: null,
-    imageUrl: ''
-  };
+  formOrder: FormGroup; 
 
-  constructor() { }
+  public userlist: { user_id: number, username: string }[] = [];
 
-  addOrder() {
-    // Logic to add new product order
-    console.log('New Product:', this.newOrder);
-    // Implement logic to send data to backend or handle it accordingly
+  constructor(
+    private order: OrderService,
+    private router: Router,
+    private users: UserService,
+    private toastrService: NbToastrService,
+    private formBuilder: FormBuilder 
+  ) {
+    this.formOrder = this.formBuilder.group({ 
+      user_id: ['', Validators.required], 
+      order_date: ['', Validators.required],
+      total_amount: ['', Validators.required],
+      status: ['', Validators.required],
+      shipping_address: ['', Validators.required],
+      shipping_method: ['', Validators.required],
+      shipping_cost: ['', Validators.required],
+      payment_method: ['', Validators.required],
+      payment_status: ['', Validators.required],
+    });
+    this.getuser();
   }
 
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.newOrder.imageUrl = reader.result as string;
-      };
-      reader.readAsDataURL(file);
+  onSubmit() {
+    if (this.formOrder.valid) {
+      this.order.createOrder(this.formOrder.value).subscribe(
+        (res) => {
+          this.showToast('success', 'Thành công', 'Thêm đơn hàng thành công');
+          this.router.navigate(['/pages/order/listorder']);
+        },
+        (err) => {
+          console.log(err);
+          this.showToast('danger', 'Thất bại', 'Thêm đơn hàng thất bại');
+        }
+      );
+    } else {
+      this.showToast('danger', 'Lỗi', 'Vui lòng điền đầy đủ thông tin cần thiết');
     }
+  }
+
+  getuser() {
+    this.users.getAllUser().subscribe(
+      (res) => {
+        this.userlist = res.users;
+        console.log(this.userlist);
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
+
+  private showToast(status: NbComponentStatus, title: string, message: string) {
+    this.toastrService.show(message, title, {
+      status,
+      position: NbGlobalPhysicalPosition.TOP_RIGHT,
+    });
   }
 }
