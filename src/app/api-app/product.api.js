@@ -8,7 +8,7 @@ exports.getall = async (req, res) => {
 exports.getbyid = async (req, res) => {
   let id = req.params.id;
   let product = await product_class.getproductbyid(id);
-  if (product.length  == 0) {
+  if (product.length == 0) {
     return res.status(404).json({ message: "Không tìm thấy sản phẩm" });
   }
   res.status(200).json({
@@ -17,7 +17,17 @@ exports.getbyid = async (req, res) => {
 };
 exports.addproduct = async (req, res) => {
   let product = req.body;
-  let result = await product_class.addproduct(product);
+  let data = {
+    title: product.title,
+    price: product.price,
+    image: req.file.filename,
+    description: product.description,
+    publisher: product.publisher,
+    release_date: product.release_date,
+    stock: product.stock,
+    category_id: product.category_id,
+  };
+  let result = await product_class.addproduct(data);
   res.status(201).json({
     product: result,
   });

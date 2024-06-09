@@ -3,28 +3,43 @@
     <nb-card>
       <nb-card-header>Thêm người dùng</nb-card-header>
       <nb-card-body>
-        <input type="text" class="mt-3" nbInput fullWidth placeholder="Tên đăng nhập">
-
-        <input class="mt-3 " type="text" nbInput fullWidth placeholder="Mật khẩu">
-        <input class="mt-3 " type="text" nbInput fullWidth placeholder="Họ">
-        <input class="mt-3 " type="text" nbInput fullWidth placeholder="Tên">
-        <input class="mt-3 " type="text" nbInput fullWidth placeholder="Email">
-        <nb-card class="mt-3">
-          <nb-card-header>Chọn vai trò</nb-card-header>
-          <nb-card-body>
-            <nb-select selected="1" fullWidth>
-              <nb-option value="1">Nhân viên</nb-option>
-              <nb-option value="2">Khách hàng</nb-option>
-            </nb-select>
-          </nb-card-body>
-        </nb-card>
-
-        <!-- <input class="mt-3" type="file" nbInput fullWidth placeholder="Hình ảnh">
-        <input class="mt-3" type="date" nbInput fullWidth placeholder="Ngày ra mắt">
-        <input class="mt-3" type="text" nbInput fullWidth placeholder="Số lượng">
-
-        <textarea class="mt-3" rows="5" nbInput fullWidth placeholder="Mô tả sản phẩm"></textarea> -->
-        <button hero nbButton>Thêm</button>
+        <form [formGroup]="formAddUser" (ngSubmit)="onSubmit()">
+          
+          <input type="text" class="mt-3" nbInput fullWidth placeholder="Tên đăng nhập" formControlName="username">
+          <span class="text-danger" *ngIf="formAddUser.get('username')!.invalid &&
+            (formAddUser.get('username')!.dirty || formAddUser.get('username')!.touched)">Vui lòng nhập tên đăng nhập!
+          </span>
+          <input class="mt-3 " type="password" nbInput fullWidth placeholder="Mật khẩu" formControlName="password">
+          <span class="text-danger" *ngIf="formAddUser.get('password')!.invalid &&
+            (formAddUser.get('password')!.dirty || formAddUser.get('password')!.touched)">Vui lòng nhập mật khẩu!
+          </span>
+          <input class="mt-3 " type="text" nbInput fullWidth placeholder="Họ" formControlName="first_name">
+          <span class="text-danger" *ngIf="formAddUser.get('first_name')!.invalid &&
+            (formAddUser.get('first_name')!.dirty || formAddUser.get('first_name')!.touched)">Vui lòng nhập họ!
+          </span>
+          <input class="mt-3 " type="text" nbInput fullWidth placeholder="Tên" formControlName="last_name">
+          <span class="text-danger" *ngIf="formAddUser.get('last_name')!.invalid &&
+            (formAddUser.get('last_name')!.dirty || formAddUser.get('last_name')!.touched)">Vui lòng nhập tên!
+          </span>
+          <input class="mt-3 " type="text" nbInput fullWidth placeholder="Email" formControlName="email">
+          <span class="text-danger" *ngIf="formAddUser.get('email')!.invalid &&
+            (formAddUser.get('email')!.dirty || formAddUser.get('email')!.touched)">Vui lòng nhập email!
+          </span>
+          <nb-card class="mt-3">
+            <nb-card-header>Vai trò</nb-card-header>
+            <nb-card-body>
+              <nb-select selected="1" fullWidth formControlName="role">
+                <nb-option value="">Chọn vai trò</nb-option>
+                <nb-option value="1">Nhân viên</nb-option>
+                <nb-option value="2">Khách hàng</nb-option>
+              </nb-select>
+            </nb-card-body>
+            <span class="text-danger" *ngIf="formAddUser.get('role')!.invalid &&
+            (formAddUser.get('role')!.dirty || formAddUser.get('role')!.touched)">Vui lòng chọn vai trò!
+            </span>
+          </nb-card>
+          <button hero nbButton type="submit">Thêm</button>
+        </form>
       </nb-card-body>
     </nb-card>
   </div>

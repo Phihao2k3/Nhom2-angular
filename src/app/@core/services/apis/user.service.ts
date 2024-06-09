@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import {ApiService} from "../common";
-import {UserProfile} from "../../model/user-info.model";
-import {API_ENDPOINT,API_BASE_URL} from "../../config/api-endpoint.config";
+import { ApiService } from "../common";
+import { UserProfile } from "../../model/user-info.model";
+import { API_ENDPOINT } from "../../config/api-endpoint.config";
+import { API_BASE_URL } from '../../config/api-endpoint.config';
 
 @Injectable({
   providedIn: 'root',
@@ -14,11 +15,12 @@ export class UserService extends ApiService {
 
   constructor(
     private _http: HttpClient,
+    private router: Router
   ) {
     super(_http);
   }
 
-  updateProfile(): Observable<UserProfile[]>  {
+  updateProfile(): Observable<UserProfile[]> {
     return this.get(API_ENDPOINT.auth.updateProfile);
   }
   getAllUser(): Observable<any> {

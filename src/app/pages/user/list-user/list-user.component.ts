@@ -1,5 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
+import { Router } from '@angular/router';
+import { UserService } from 'app/@core/services/apis/user.service';
+import { IUsers } from 'app/@core/interfaces/users.interface';
+import { NbToastrService, NbComponentStatus, NbGlobalPhysicalPosition } from '@nebular/theme';
+import { config } from 'rxjs';
 
 
 @Component({
@@ -7,7 +12,65 @@ import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSou
   templateUrl: './list-user.component.html',
   styleUrls: ['./list-user.component.scss'],
 })
-export class ListUserComponent {
+export class ListUserComponent implements OnInit {
+  users: IUsers[] = [];
+
+  ngOnInit(): void {
+    this.getUser();
+  }
+
+  constructor(
+    private user_service: UserService,
+    private toastrService: NbToastrService
+  ) {
+
+  }
+
+  getUser() {
+    this.user_service.getAllUser().subscribe(res => {
+      this.users = res.users;
+      this.data = this.users;
+    }, err => {
+      console.log(err);
+    })
+  }
+
+  onDeleteConfirm(event) {
+    if (window.confirm("Bạn có muốn tiếp tục xóa không ?")) {
+      this.user_service.deleteUser(event.data.user_id).subscribe(
+        (res) => {
+          this.showToast('success', 'Thành công', 'Xóa tài khoản thành công');
+          event.confirm.resolve();
+        },
+        (err) => {
+          this.showToast('success', 'Thất bại', 'Xóa tài khoản thất bại');
+          event.confirm.reject();
+        },
+      )
+    }
+  }
+
+  onSaveConfirm(event) {
+   
+    this.user_service.updateUser(event.data.user_id, event.newData).subscribe(
+      (res) => {
+        
+        this.showToast('success', 'Thành công', 'Sửa thành công');
+        this.getUser()
+      },
+      (err) => {
+        this.showToast('success', 'Thất bại', 'Sửa thất bại');
+      },
+    )
+  }
+
+  private showToast(status: NbComponentStatus, title: string, message: string) {
+    this.toastrService.show(message, title, {
+      status,
+      position: NbGlobalPhysicalPosition.TOP_RIGHT
+    })
+  }
+
   settings = {
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
@@ -18,34 +81,38 @@ export class ListUserComponent {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
+      confirmSave: true
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
     },
     columns: {
-      ID: {
+      user_id: {
         title: 'ID',
+        hide: true
       },
       username: {
         title: 'Tên đăng nhập',
       },
-      password: {
-        title: 'Mật khẩu',
-      },
-      first: {
+      first_name: {
         title: 'Họ',
       },
-      last: {
+      last_name: {
         title: 'Tên',
       },
       email: {
         title: 'Email',
       },
       role: {
-        title: 'Vai trò', 
+        title: 'Vai trò',
+        editor: {
+          type: 'list',
+          config: {
+            list: [{ value: '1', title: 'Nhân viên' }, { value: '2', title: 'Quản lý' }]
+          }
+        }
       },
-      
     },
     actions: {
       // Define actions column
@@ -56,25 +123,6 @@ export class ListUserComponent {
     },
   };
 
-  data = [
-    {
-      ID: 1,
-      username: 'nthaiduong00000',
-      password: 'teketeke123',
-      first: 'Nguyễn',
-      last: 'Thái Dương',
-      email: 'duonghehe@gmail.com',
-      role: 'Nhân viên',
-    },
-    {
-      ID: 2,
-      username: 'haodomdom',
-      password: 'jack97',
-      first: 'Trần',
-      last: 'Phi Hào',
-      email: 'haodomdom97@gmail.com',
-      role: 'Khách hàng',
-    },
-  ];
+  data = [];
 }
 
