@@ -34,7 +34,7 @@
             <nb-card-header>Chọn thể loại</nb-card-header>
             <nb-card-body>
               <nb-select fullWidth formControlName="category_id" placeholder="Chọn thể loại">
-                <nb-option *ngFor="let category of category" [value]="category.id">
+                <nb-option *ngFor="let category of categories" [value]="category.id">
                   {{ category.name }}
                 </nb-option>
               </nb-select>
