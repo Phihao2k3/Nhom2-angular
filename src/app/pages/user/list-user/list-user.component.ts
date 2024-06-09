@@ -51,9 +51,10 @@ export class ListUserComponent implements OnInit {
   }
 
   onSaveConfirm(event) {
-
+   
     this.user_service.updateUser(event.data.user_id, event.newData).subscribe(
       (res) => {
+        
         this.showToast('success', 'Thành công', 'Sửa thành công');
         this.getUser()
       },

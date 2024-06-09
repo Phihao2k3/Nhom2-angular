@@ -1,0 +1,94 @@
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card>
+
+      <nb-card-header>Chỉnh sửa sản phẩm</nb-card-header>
+      <form [formGroup]="formeditproduct" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+        <nb-card-body>
+          <nb-card class="mt-3">
+            <nb-card-header>Tên sản phẩm</nb-card-header>
+            <nb-card-body>
+              <input type="text" nbInput fullWidth placeholder="Tên sản phẩm" formControlName="title">
+              <span *ngIf="formeditproduct.get('title').invalid && formeditproduct.get('title').touched"
+                class="text-danger">Tên sản phẩm không được để trống</span>
+            </nb-card-body>
+          </nb-card>
+
+          <nb-card class="mt-3">
+            <nb-card-header>Giá sản phẩm</nb-card-header>
+            <nb-card-body>
+              <input type="text" (input)="formatMoney($event)" nbInput fullWidth placeholder="Giá sản phẩm"
+                formControlName="price">
+              <span *ngIf="formeditproduct.get('price').invalid && formeditproduct.get('price').touched"
+                class="text-danger">Giá sản phẩm không được để trống</span>
+            </nb-card-body>
+          </nb-card>
+
+          <nb-card class="mt-3">
+            <nb-card-header>Nhà xuất bản</nb-card-header>
+            <nb-card-body>
+              <input type="text" nbInput fullWidth placeholder="Nhà xuất bản" formControlName="publisher">
+              <span *ngIf="formeditproduct.get('publisher').invalid && formeditproduct.get('publisher').touched"
+                class="text-danger">Nhà xuất bản không được để trống</span>
+            </nb-card-body>
+          </nb-card>
+
+          <nb-card class="mt-3">
+            <nb-card-header>Chọn thể loại</nb-card-header>
+            <nb-card-body>
+              <nb-select selected="1" fullWidth formControlName="category_id" placeholder="Chọn thể loại">
+                <nb-option *ngFor="let category of categories"
+                  [value]="category.category_id ">{{category.category_name}}</nb-option>
+              </nb-select>
+
+            </nb-card-body>
+          </nb-card>
+          <nb-card class="mt-3">
+            <nb-card-header>Hình ảnh</nb-card-header>
+            <nb-card-body>
+              <input type="file" (change)="onFileChange($event)" #fileUpload nbInput fullWidth placeholder="Hình ảnh"
+                formControlName="image">
+              <span *ngIf="formeditproduct.get('image').invalid && formeditproduct.get('image').touched"
+                class="text-danger">Hình ảnh không được để trống</span>
+            </nb-card-body>
+          </nb-card>
+          <nb-card class="mt-3">
+            <nb-card-header>Ngày ra mắt</nb-card-header>
+            <nb-card-body>
+              <input type="date" nbInput fullWidth placeholder="Ngày ra mắt" formControlName="release_date">
+              <span *ngIf="formeditproduct.get('release_date').invalid && formeditproduct.get('release_date').touched"
+                class="text-danger">
+                Ngày ra mắt không được để trống
+              </span>
+            </nb-card-body>
+          </nb-card>
+
+          <nb-card class="mt-3">
+            <nb-card-header>Số lượng</nb-card-header>
+            <nb-card-body>
+              <input type="text" nbInput fullWidth placeholder="Số lượng" formControlName="stock">
+              <span *ngIf="formeditproduct.get('stock').invalid && formeditproduct.get('stock').touched"
+                class="text-danger">Số lượng không được để trống</span>
+            </nb-card-body>
+          </nb-card>
+
+          <nb-card class="mt-3">
+            <nb-card-header>Mô tả sản phẩm</nb-card-header>
+            <nb-card-body>
+              <textarea rows="5" formControlName="description" nbInput fullWidth
+                placeholder="Mô tả sản phẩm"></textarea>
+              <span *ngIf="formeditproduct.get('description').invalid && formeditproduct.get('description').touched"
+                class="text-danger">Mô tả sản phẩm không được để trống</span>
+            </nb-card-body>
+          </nb-card>
+
+          <div class="mt-3 text-center">
+            <button hero nbButton status="primary">Thêm sản phẩm</button>
+          </div>
+
+        </nb-card-body>
+
+      </form>
+    </nb-card>
+  </div>
+</div>

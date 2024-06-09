@@ -4,7 +4,6 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
 import { Router } from '@angular/router';
 import { NbToastrService, NbComponentStatus, NbGlobalPhysicalPosition } from '@nebular/theme';
 import * as bcrypt from 'bcryptjs';
-
 @Component({
   selector: 'ngx-form-inputs',
   templateUrl: './add-user.component.html',

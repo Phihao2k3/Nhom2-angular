@@ -14,9 +14,11 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
 });
+router.post("/login", usersapi.login);
 router.delete("/:id",usersapi.deleteusers)
 router.put("/:id", usersapi.updateusers);
 router.post("/", usersapi.addusers);
 router.get("/:id", usersapi.getbyid);
 router.get("/", usersapi.getall);
+// login
 module.exports = router;

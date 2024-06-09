@@ -5,7 +5,7 @@ const multer = require("multer");
 const productapi = require("../../api-app/product.api");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./uploads");
+    cb(null, "./src/uploads");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + "-" + file.originalname);
@@ -14,9 +14,9 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
 });
-router.delete("/:id",productapi.deleteproduct)
-router.put("/:id", productapi.updateproduct);
-router.post("/", productapi.addproduct);
+router.delete("/:id", productapi.deleteproduct);
+router.put("/:id",upload.single("image"), productapi.updateproduct);
+router.post("/", upload.single("image"), productapi.addproduct);
 router.get("/:id", productapi.getbyid);
 router.get("/", productapi.getall);
 module.exports = router;
