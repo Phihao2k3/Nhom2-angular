@@ -1,31 +1,95 @@
 <div class="container">
-    <h2 class="title">Thêm Đơn Hàng</h2>
-    <form (ngSubmit)="addOrder()">
-      <div class="form-group">
-        <label for="productName">Tên Sản Phẩm:</label>
-        <input type="text" class="form-control" id="productName" name="productName" required>
+  <h2 class="title">Thêm Đơn Hàng</h2>
+  <form [formGroup]="formOrder" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="userId">Mã Người Dùng:</label>
+      <select class="form-control" id="userId" formControlName="user_id">
+        <option value="" disabled selected>Chọn mã tài khoản</option>
+        <option *ngFor="let user of userlist" [value]="user.user_id">{{ user.username }}</option>
+      </select>
+      <div *ngIf="formOrder.get('user_id').errors && formOrder.get('user_id').touched" class="text-danger">
+        Mã người dùng là bắt buộc.
       </div>
-      <div class="form-group">
-        <label for="category">Thể Loại:</label>
-        <input type="text" class="form-control" id="category"  name="category" required>
+    </div>
+    <div class="form-group">
+      <label for="orderDate">Ngày Đặt Hàng:</label>
+      <input type="datetime-local" class="form-control" id="orderDate" formControlName="order_date">
+      <div *ngIf="formOrder.get('order_date').errors && formOrder.get('order_date').touched" class="text-danger">
+        Ngày đặt hàng là bắt buộc.
       </div>
-      <div class="form-group">
-        <label for="price">Giá:</label>
-        <input type="number" class="form-control" id="price" name="price" required>
+    </div>
+    <div class="form-group">
+      <label for="totalAmount">Tổng Số Tiền:</label>
+      <input type="number" class="form-control" id="totalAmount" formControlName="total_amount">
+      <div *ngIf="formOrder.get('total_amount').errors && formOrder.get('total_amount').touched" class="text-danger">
+        Tổng số tiền là bắt buộc.
       </div>
-      <div class="form-group">
-        <label for="quantity">Số Lượng:</label>
-        <input type="number" class="form-control" id="quantity" name="quantity" required>
+    </div>
+    <div class="form-group">
+      <label for="status">Trạng Thái:</label>
+      <select class="form-control" id="status" formControlName="status">
+        <option value="" disabled selected>Chọn trạng thái</option>
+        <option value="1">Đang chờ xác nhận</option>
+        <option value="2">Đã xác nhận</option>
+        <option value="3">Đã hủy</option>
+        <option value="4">Thành công</option>
+      </select>
+      <div *ngIf="formOrder.get('status').errors && formOrder.get('status').touched" class="text-danger">
+        Trạng thái là bắt buộc.
       </div>
-      <div class="form-group">
-        <label for="image">Hình Ảnh:</label>
-        <input type="file" class="form-control" id="image" (change)="onFileSelected($event)" required>
-        <div *ngIf="newOrder.imageUrl">
-          <img [src]="newOrder.imageUrl" alt="Product Image" class="img-preview">
-        </div>
-
+    </div>
+    <div class="form-group">
+      <label for="shippingAddress">Địa Chỉ Giao Hàng:</label>
+      <textarea class="form-control" id="shippingAddress" formControlName="shipping_address"></textarea>
+      <div *ngIf="formOrder.get('shipping_address').errors && formOrder.get('shipping_address').touched"
+        class="text-danger">
+        Địa chỉ giao hàng là bắt buộc.
       </div>
-      <button type="submit" class="btn btn-primary">Thêm Đơn Hàng</button>
-    </form>
-  </div>
-  
+    </div>
+    <div class="form-group">
+      <label for="shippingMethod">Phương Thức Giao Hàng:</label>
+      <select class="form-control" id="shippingMethod" formControlName="shipping_method">
+        <option value="" disabled selected>Chọn phương thức giao hàng</option>
+        <option value="standard">Giao hàng tiêu chuẩn</option>
+        <option value="express">Giao hàng nhanh</option>
+      </select>
+      <div *ngIf="formOrder.get('shipping_method').errors && formOrder.get('shipping_method').touched"
+        class="text-danger">
+        Phương thức giao hàng là bắt buộc.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="shippingCost">Chi Phí Giao Hàng:</label>
+      <input type="number" class="form-control" id="shippingCost" formControlName="shipping_cost">
+      <div *ngIf="formOrder.get('shipping_cost').errors && formOrder.get('shipping_cost').touched" class="text-danger">
+        Chi phí giao hàng là bắt buộc.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="paymentMethod">Phương Thức Thanh Toán:</label>
+      <select class="form-control" id="paymentMethod" formControlName="payment_method">
+        <option value="" disabled selected>Chọn phương thức thanh toán</option>
+        <option value="bank_transfer">Chuyển khoản ngân hàng</option>
+        <option value="cash">Tiền mặt</option>
+      </select>
+      <div *ngIf="formOrder.get('payment_method').errors && formOrder.get('payment_method').touched"
+        class="text-danger">
+        Phương thức thanh toán là bắt buộc.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="paymentStatus">Trạng Thái Thanh Toán:</label>
+      <select class="form-control" id="paymentStatus" formControlName="payment_status">
+        <option value="" disabled selected>Chọn trạng thái thanh toán</option>
+        <option value="pending">Chờ xử lý</option>
+        <option value="paid">Đã thanh toán</option>
+        <option value="cancelled">Đã hủy</option>
+      </select>
+      <div *ngIf="formOrder.get('payment_status').errors && formOrder.get('payment_status').touched"
+        class="text-danger">
+        Trạng thái thanh toán là bắt buộc.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Thêm Đơn Hàng</button>
+  </form>
+</div>
