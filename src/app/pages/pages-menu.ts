@@ -66,4 +66,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
+  {
+    title: 'Store Inventory',
+    icon: 'layout-outline',
+    children: [
+      {
+        title: 'Thêm loại',
+        link: '/pages/store-inventory/store-inventory-add',
+      },
+      {
+        title: 'Hiển thị danh sách',
+        link: '/pages/store-inventory/store-inventory-list',
+      },
+    ],
+  },
 ];
