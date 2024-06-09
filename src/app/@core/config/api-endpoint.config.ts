@@ -34,7 +34,7 @@ export const API_ENDPOINT: IAPIEndpoint = {
     detail: '/orders/',
   },
   users: {
-    base: API_BASE_URL + '/' + 'users',
+    base: API_BASE_URL + '/' + ' users',
     list: '/users/',
     create: '/users/',
     update: '/users/',
