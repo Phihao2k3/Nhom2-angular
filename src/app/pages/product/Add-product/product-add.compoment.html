@@ -33,8 +33,7 @@
             <nb-card-header>Chọn thể loại</nb-card-header>
             <nb-card-body>
               <nb-select selected="1" fullWidth formControlName="category_id" placeholder="Chọn thể loại">
-                <nb-option value="1">Option 1</nb-option>
-                <nb-option value="2">Option 2</nb-option>
+                <nb-option *ngFor="let category of categories" [value]="category.category_id ">{{category.category_name}}</nb-option>
               </nb-select>
 
             </nb-card-body>
@@ -71,7 +70,7 @@
               <span *ngIf="formaddproduct.get('description').invalid && formaddproduct.get('description').touched" class="text-danger">Mô tả sản phẩm không được để trống</span>
             </nb-card-body>
           </nb-card>
-  
+
           <div class="mt-3 text-center">
             <button hero nbButton status="primary">Thêm sản phẩm</button>
           </div>

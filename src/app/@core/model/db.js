@@ -2,7 +2,7 @@ var mysql = require("mysql");
 var db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "mysql",
+  password: "123",
   database: "angular",
 });
 db.connect(function (err) {
