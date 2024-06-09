@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { OnInit } from '@angular/core';
 import { ProductService } from 'app/@core/services/apis/product.service';
+import { CategoriesService } from 'app/@core/services/apis/categories.service';
 import {
   AlertShowcaseComponent,
   IAlertMessage,
@@ -21,11 +22,12 @@ import {
 export class productaddComponent implements OnInit {
   formaddproduct: FormGroup;
   file: File | null = null;
-
+  categories: [] = [];
   constructor(
     private serviceproduct: ProductService,
     private spinner: SpinnerService,
-    private toastrService: NbToastrService
+    private toastrService: NbToastrService,
+    private servicecategory: CategoriesService
   ) {
     this.formaddproduct = new FormGroup({
       title: new FormControl('', Validators.required),
@@ -38,7 +40,9 @@ export class productaddComponent implements OnInit {
       description: new FormControl('', Validators.required),
     });
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getallCategories();
+  }
   onSubmit() {
     if (this.formaddproduct.valid) {
       let formData = new FormData();
@@ -102,5 +106,15 @@ export class productaddComponent implements OnInit {
       status,
       position: NbGlobalPhysicalPosition.TOP_RIGHT,
     });
+  }
+  getallCategories() {
+    this.servicecategory.getallCategories().subscribe(
+      (res) => {
+        this.categories = res.productcate;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }

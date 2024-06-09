@@ -8,7 +8,7 @@ import {
   NbGlobalPhysicalPosition,
 } from '@nebular/theme';
 import { Router } from '@angular/router';
-import { ShowcaseDialogComponent } from 'app/@theme/components/showcase-dialog/showcase-dialog.component';
+
 @Component({
   selector: 'basic-example-data',
   template: `
@@ -34,6 +34,16 @@ export class productlistComponent implements OnInit {
       confirmDelete: true,
     },
     columns: {
+      index: {
+        title: 'STT',
+        type: 'number',
+        filter: false,
+        editable: false,
+        addable: false,
+        valuePrepareFunction: (value, row, cell) => {
+          return cell.row.index + 1;
+        },
+      },
       product_id: {
         title: 'ID',
         type: 'number',
@@ -118,25 +128,21 @@ export class productlistComponent implements OnInit {
   }
 
   onDeleteConfirm(event): void {
-    // if (window.confirm('Are you sure you want to delete?')) {
-    //   this.productService.deleteProduct(event.data.product_id).subscribe(
-    //     (res) => {
-    //       this.showToast('success', 'Thành công', 'Xóa sản phẩm thành công');
-    //       event.confirm.resolve();
-    //     },
-    //     (err) => {
-    //       this.showToast('danger', 'Thất bại', 'Xóa sản phẩm thất bại');
-    //       event.confirm.reject();
-    //     }
-    //   );
-    // } else {
-    //   event.confirm.reject();
-    // }
-    this.dialogService.open(ShowcaseDialogComponent, {
-      context: {
-        title: 'This is a title passed to the dialog component',
-      },
-    });
+    if (window.confirm('Are you sure you want to delete?')) {
+      this.productService.deleteProduct(event.data.product_id).subscribe(
+        (res) => {
+          this.showToast('success', 'Thành công', 'Xóa sản phẩm thành công');
+          event.confirm.resolve();
+        },
+        (err) => {
+          this.showToast('danger', 'Thất bại', 'Xóa sản phẩm thất bại');
+          event.confirm.reject();
+        }
+      );
+    } else {
+      event.confirm.reject();
+    }
+  
   }
   onSaveConfirm(event): void {
     this.Router.navigate([
