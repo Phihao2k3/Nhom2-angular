@@ -1,0 +1,31 @@
+<div class="container">
+    <h2 class="title">Thêm Đơn Hàng</h2>
+    <form (ngSubmit)="addOrder()">
+      <div class="form-group">
+        <label for="productName">Tên Sản Phẩm:</label>
+        <input type="text" class="form-control" id="productName" name="productName" required>
+      </div>
+      <div class="form-group">
+        <label for="category">Thể Loại:</label>
+        <input type="text" class="form-control" id="category"  name="category" required>
+      </div>
+      <div class="form-group">
+        <label for="price">Giá:</label>
+        <input type="number" class="form-control" id="price" name="price" required>
+      </div>
+      <div class="form-group">
+        <label for="quantity">Số Lượng:</label>
+        <input type="number" class="form-control" id="quantity" name="quantity" required>
+      </div>
+      <div class="form-group">
+        <label for="image">Hình Ảnh:</label>
+        <input type="file" class="form-control" id="image" (change)="onFileSelected($event)" required>
+        <div *ngIf="newOrder.imageUrl">
+          <img [src]="newOrder.imageUrl" alt="Product Image" class="img-preview">
+        </div>
+
+      </div>
+      <button type="submit" class="btn btn-primary">Thêm Đơn Hàng</button>
+    </form>
+  </div>
+  

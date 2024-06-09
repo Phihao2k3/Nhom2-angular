@@ -1,0 +1,73 @@
+{
+  "name": "asm",
+  "version": "1.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve --open",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "start2": "node app.js"
+  },
+  "private": true,
+  "dependencies": {
+    "@akveo/ng2-completer": "^9.0.1",
+    "@angular/animations": "^15.2.9",
+    "@angular/cdk": "^15.2.9",
+    "@angular/common": "^15.2.0",
+    "@angular/compiler": "^15.2.0",
+    "@angular/core": "^15.2.0",
+    "@angular/forms": "^12.1.0",
+    "@angular/platform-browser": "^15.2.0",
+    "@angular/platform-browser-dynamic": "^15.2.0",
+    "@angular/router": "^15.2.0",
+    "@auth0/angular-jwt": "^5.1.2",
+    "@nebular/auth": "^11.0.0",
+    "@nebular/eva-icons": "^11.0.0",
+    "@nebular/security": "^11.0.0",
+    "@nebular/theme": "^11.0.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "bootstrap": "^5.2.3",
+    "eva-icons": "^1.1.3",
+    "express": "^4.19.2",
+    "leaflet": "1.2.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
+    "nebular-icons": "^1.1.0",
+    "ng2-completer": "^9.0.1",
+    "ng2-smart-table": "^1.7.2",
+    "request": "^2.88.2",
+    "rxjs": "~7.8.0",
+    "sass-loader": "^13.3.2",
+    "tslib": "^2.5.0",
+    "xng-breadcrumb": "^9.0.0",
+    "zone.js": "~0.12.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^15.2.6",
+    "@angular/cli": "~15.2.6",
+    "@angular/compiler-cli": "^15.2.0",
+    "@schematics/angular": "~15.2.6",
+    "@types/jasmine": "~4.3.0",
+    "jasmine-core": "~4.5.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.0.0",
+    "typescript": "~4.9.4"
+  },
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Phihao2k3/Nhom2-angular.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Phihao2k3/Nhom2-angular/issues"
+  },
+  "homepage": "https://github.com/Phihao2k3/Nhom2-angular#readme"
+}
