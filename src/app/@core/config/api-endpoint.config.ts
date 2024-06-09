@@ -25,12 +25,5 @@ export const API_ENDPOINT: IAPIEndpoint = {
     delete: '/product/',
     detail: '/product/',
   },
-  categories: {
-    base: API_BASE_URL + '/' + 'productcate',
-    list: '/productcate/',
-    create: '/productcate/',
-    update: '/productcate/',
-    delete: '/productcate/',
-    detail: '/productcate/',
-  },
+ 
 }
