@@ -4,7 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const routes = require("./src/app/routes");
 const multer = require('multer');
-const cors = require("cors");
+
 const app = express();
 const path = require("path");
 const port = 2904;

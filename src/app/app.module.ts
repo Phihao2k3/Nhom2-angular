@@ -16,7 +16,6 @@ import {HttpClientModule} from "@angular/common/http";
 import {CoreModule} from "./@core/core.module";
 import {ThemeModule} from "./@theme/theme.module";
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-import { ReactiveFormsModule} from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,

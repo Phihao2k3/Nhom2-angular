@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
           error: this.handleLoginFailed.bind(this),
         });
     }
+ 
   }
 
   protected handleLoginSuccess(res) {
