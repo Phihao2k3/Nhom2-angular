@@ -22,7 +22,8 @@
       <label for="totalAmount">Tổng Số Tiền:</label>
       <input type="number" class="form-control" id="totalAmount" formControlName="total_amount">
       <div *ngIf="formOrder.get('total_amount').errors && formOrder.get('total_amount').touched" class="text-danger">
-        Tổng số tiền là bắt buộc.
+        <div *ngIf="formOrder.get('total_amount').errors.required">Tổng số tiền là bắt buộc.</div>
+        <div *ngIf="formOrder.get('total_amount').errors.min">Tổng số tiền phải lớn hơn 0.</div>
       </div>
     </div>
     <div class="form-group">

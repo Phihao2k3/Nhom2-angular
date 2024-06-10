@@ -24,10 +24,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     NbSelectModule,
     NbUserModule,
     FormsModule ,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
   declarations: [
     ...routedComponents,
+   
     // FsIconComponent,
   ],
 })

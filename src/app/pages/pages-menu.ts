@@ -71,7 +71,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'layout-outline',
     children: [
       {
-        title: 'Thêm loại',
+        title: 'Thêm kho hàng',
         link: '/pages/store-inventory/store-inventory-add',
       },
       {

@@ -29,7 +29,7 @@ export class AddorderComponent {
     this.formOrder = this.formBuilder.group({ 
       user_id: ['', Validators.required], 
       order_date: ['', Validators.required],
-      total_amount: ['', Validators.required],
+      total_amount: ['', [Validators.required, Validators.min(1)]],
       status: ['', Validators.required],
       shipping_address: ['', Validators.required],
       shipping_method: ['', Validators.required],

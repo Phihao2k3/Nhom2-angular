@@ -41,4 +41,20 @@ export const API_ENDPOINT: IAPIEndpoint = {
     delete: '/users/',
     detail: '/users/',
   },
+  storeinventory: {
+    base: API_BASE_URL + '/' + ' store_inventory',
+    list: '/store_inventory/',
+    create: '/store_inventory/',
+    update: '/store_inventory/',
+    delete: '/store_inventory/',
+    detail: '/store_inventory/',
+  },
+  stores: {
+    base: API_BASE_URL + '/' + ' stores',
+    list: '/stores/',
+    create: '/stores/',
+    update: '/stores/',
+    delete: '/stores/',
+    detail: '/stores/',
+  },
 };
