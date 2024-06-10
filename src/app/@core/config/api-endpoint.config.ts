@@ -17,14 +17,6 @@ export const API_ENDPOINT: IAPIEndpoint = {
     delete: '/productcate/',
     detail: '/productcate/',
   },
-  product: {
-    base: API_BASE_URL + '/' + 'product',
-    list: '/product/',
-    create: '/product/',
-    update: '/product/',
-    delete: '/product/',
-    detail: '/product/',
-  },
   order: {
     base: API_BASE_URL + '/' + 'orders',
     list: '/orders/',
