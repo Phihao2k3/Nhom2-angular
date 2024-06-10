@@ -41,7 +41,7 @@ export const API_ENDPOINT: IAPIEndpoint = {
     delete: '/store_inventory/',
     detail: '/store_inventory/',
   },
-  
+
   employees: {
     base: API_BASE_URL + '/' + ' employees',
     list: '/employees/',

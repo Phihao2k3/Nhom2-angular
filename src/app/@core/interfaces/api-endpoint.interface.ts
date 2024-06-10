@@ -8,5 +8,5 @@ export interface IAPIEndpoint {
 
   employees :any;
   stores:any
- 
+
 }

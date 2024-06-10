@@ -1,6 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
+import { ProfileComponent } from './profile/profile.component';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
@@ -47,6 +48,12 @@ const routes: Routes = [
         path: 'employees',
         loadChildren: () =>
           import('./employees/employees.module').then((m) => m.employeesModule),
+      },
+
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        data: { breadcrumb: 'Profile' },
       },
     ],
   },

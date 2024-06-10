@@ -15,8 +15,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'person-outline',
     children: [
       {
-        title: 'Thêm User',
-        icon: 'person-add-outline',
+        title: 'Thêm người dùng',
         link: '/pages/user/adduser',
       },
       {
@@ -88,6 +87,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
+
   {
     title: 'Employees',
     icon: 'people-outline',
@@ -101,6 +101,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Hiển thị danh sách',
         icon: 'people-outline',
         link: '/pages/employees/listEmployees',
+      },
+    ],
+  },
+  {
+    title: 'Stores',
+    icon: 'layout-outline',
+    children: [
+      {
+        title: 'Thêm cửa hàng',
+        link: '/pages/store/addstore',
+      },
+      {
+        title: 'Hiển thị danh sách',
+        link: '/pages/store/liststore',
       },
     ],
   },

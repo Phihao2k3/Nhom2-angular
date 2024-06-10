@@ -12,7 +12,7 @@ import * as bcrypt from 'bcryptjs';
 export class AddUserComponent implements OnInit {
   formAddUser: FormGroup;
 
-  constructor(private user: UserService, private router: Router) {
+  constructor(private user: UserService, private router: Router, private toastrService: NbToastrService) {
     this.formAddUser = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
@@ -36,7 +36,7 @@ export class AddUserComponent implements OnInit {
       user.password = hashedPassword;
 
       this.user.createUser(user).subscribe((res) => {
-        alert("Thêm thành công!");
+        this.showToast('success', 'Thành công', 'Thêm thành công');
         this.router.navigate(['/pages/user/listuser'])
       },
         (err) => {
@@ -45,8 +45,15 @@ export class AddUserComponent implements OnInit {
       )
     }
     else {
-      console.log("Bạn thiếu thông tin!");
+      this.showToast('success', 'Thất bại', 'Vui lòng điền đủ thông tin!');
     }
     console.log(this.formAddUser.value);
+  }
+
+  private showToast(status: NbComponentStatus, title: string, message: string) {
+    this.toastrService.show(message, title, {
+      status,
+      position: NbGlobalPhysicalPosition.TOP_RIGHT
+    })
   }
 }

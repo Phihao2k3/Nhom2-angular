@@ -10,6 +10,7 @@ exports.getall = async (req, res) => {
     });
   }
 };
+
 exports.getbyid = async (req, res) => {
   let id = req.params.id;
   let stores = await stores_class.getstoresbyid(id);
@@ -20,6 +21,7 @@ exports.getbyid = async (req, res) => {
     stores: stores,
   });
 };
+
 exports.addstores = async (req, res) => {
   let stores = req.body;
   let result = await stores_class.addstores(stores);
@@ -29,6 +31,7 @@ exports.addstores = async (req, res) => {
     return res.status(201).json({ message: "Thêm cửa hàng thành công" });
   }
 };
+
 exports.updatestores = async (req, res) => {
   let id = req.params.id;
   let stores = req.body;
@@ -38,6 +41,7 @@ exports.updatestores = async (req, res) => {
   }
   res.status(200).json({ message: "Cập nhật thành công" });
 };
+
 exports.deletestores = async (req, res) => {
   let id = req.params.id;
   let deletestores = await stores_class.deletestores(id);

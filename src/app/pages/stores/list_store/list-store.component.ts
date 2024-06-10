@@ -1,63 +1,48 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
 import { Router } from '@angular/router';
-import { UserService } from 'app/@core/services/apis/user.service';
-import { IUsers } from 'app/@core/interfaces/users.interface';
+import { StoreService } from 'app/@core/services/apis/store.service';
+import { IStores } from 'app/@core/interfaces/stores.interface';
 import { NbToastrService, NbComponentStatus, NbGlobalPhysicalPosition } from '@nebular/theme';
-import { API_BASE_URL } from 'app/@core/config/api-endpoint.config';
-import { API_ENDPOINT } from 'app/@core/config/api-endpoint.config';
+
 
 @Component({
   selector: 'ngx-tree-grid',
-  templateUrl: './list-user.component.html',
-  styleUrls: ['./list-user.component.scss'],
+  templateUrl: './list-store.component.html',
+  styleUrls: ['./list-store.component.scss'],
 })
-export class ListUserComponent implements OnInit {
-  users: IUsers[] = [];
-
-  lastPage: number = 0;
-  currentPage: number = 0;
-  apiURL = 'http://localhost:2904/api/users';
-
+export class ListStoreComponent implements OnInit {
+  stores: IStores[] = [];
 
   ngOnInit(): void {
-    this.getUser();
+    this.getStore();
   }
 
   constructor(
-    private user_service: UserService,
+    private store_service: StoreService,
     private toastrService: NbToastrService
   ) {
 
   }
 
-  getUser() {
-    this.user_service.getAllUser().subscribe(res => {
-      this.users = res.users;
-      this.data = this.users;
-      // this.currentPage = res.meta.current_page;
-      // console.log(res.meta.current_page);
-      
-      // this.lastPage = res.meta.last_page;
+  getStore() {
+    this.store_service.getAllStore().subscribe(res => {
+      this.stores = res.stores;// res.stores lấy từ api xuống
+      this.data = this.stores;
     }, err => {
       console.log(err);
     })
   }
 
-  getPage(res: any){
-    this.data = res.users;
-    console.log(res);
-  }
-
   onDeleteConfirm(event) {
     if (window.confirm("Bạn có muốn tiếp tục xóa không ?")) {
-      this.user_service.deleteUser(event.data.user_id).subscribe(
+      this.store_service.deleteStore(event.data.store_id).subscribe(
         (res) => {
-          this.showToast('success', 'Thành công', 'Xóa tài khoản thành công');
+          this.showToast('success', 'Thành công', 'Xóa cửa hàng thành công');
           event.confirm.resolve();
         },
         (err) => {
-          this.showToast('success', 'Thất bại', 'Xóa tài khoản thất bại');
+          this.showToast('success', 'Thất bại', 'Xóa cửa hàng thất bại');
           event.confirm.reject();
         },
       )
@@ -66,10 +51,10 @@ export class ListUserComponent implements OnInit {
 
   onSaveConfirm(event) {
    
-    this.user_service.updateUser(event.data.user_id, event.newData).subscribe(
+    this.store_service.updateStore(event.data.store_id, event.newData).subscribe(
       (res) => {
         this.showToast('success', 'Thành công', 'Sửa thành công');
-        this.getUser()
+        this.getStore()
       },
       (err) => {
         this.showToast('success', 'Thất bại', 'Sửa thất bại');
@@ -101,30 +86,21 @@ export class ListUserComponent implements OnInit {
       confirmDelete: true,
     },
     columns: {
-      user_id: {
+      store_id: {
         title: 'ID',
         hide: true
       },
-      username: {
-        title: 'Tên đăng nhập',
+      store_name: {
+        title: 'Tên cửa hàng',
       },
-      first_name: {
-        title: 'Họ',
+      address: {
+        title: 'Địa chỉ',
       },
-      last_name: {
-        title: 'Tên',
+      phone_number: {
+        title: 'Số điện thoại',
       },
       email: {
         title: 'Email',
-      },
-      role: {
-        title: 'Vai trò',
-        editor: {
-          type: 'list',
-          config: {
-            list: [{ value: '1', title: 'Nhân viên' }, { value: '2', title: 'Quản lý' }]
-          }
-        }
       },
     },
     actions: {

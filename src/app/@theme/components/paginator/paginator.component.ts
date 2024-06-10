@@ -9,10 +9,11 @@ import {SpinnerService} from "../spinner/spinner.service";
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss']
 })
+
 export class PaginatorComponent implements OnInit {
-  @Input() apiUrl: string;
-  @Input() current_page: number;
-  @Input() last_page: number;
+  @Input() apiUrl!: string;
+  @Input() current_page!: number;
+  @Input() last_page!: number;
   @Output() dataList: EventEmitter<any> = new EventEmitter();
   indexPage: number = 1;
   hasPreviousPage: boolean = true;

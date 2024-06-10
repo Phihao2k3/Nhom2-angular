@@ -1,4 +1,5 @@
 var db = require("./db");
+
 class stores {
   constructor() {
     this.stores = [];
