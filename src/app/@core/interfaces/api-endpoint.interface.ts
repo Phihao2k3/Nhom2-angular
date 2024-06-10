@@ -5,5 +5,8 @@ export interface IAPIEndpoint {
   order: any;
   users: any;
   storeinventory: any;
-  stores: any;
+
+  employees :any;
+  stores:any
+ 
 }

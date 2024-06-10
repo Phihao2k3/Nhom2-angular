@@ -27,7 +27,7 @@ export class EmployeesService {
     );
   }
   updateEmployees
-  (id: number, data): Observable<any> {
+  (id, data): Observable<any> {
     return this.http.put<any>(
       API_BASE_URL + API_ENDPOINT.employees.update + id,
       data

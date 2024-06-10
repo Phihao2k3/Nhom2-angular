@@ -1,4 +1,5 @@
 const stores_class = require("../@core/model/stores");
+
 exports.getall = async (req, res) => {
   let stores = await stores_class.getallstores();
   if (stores.length == 0) {

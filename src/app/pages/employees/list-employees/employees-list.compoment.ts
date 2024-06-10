@@ -56,9 +56,10 @@ export class EmployeeslistComponent implements OnInit {
         title: 'Lương',
       },
       store_id: {
-        title: 'Lương',
-        hide: true,
+        title: 'Store',
+    
       },
+      
       
 
 
@@ -89,7 +90,10 @@ export class EmployeeslistComponent implements OnInit {
   getEmpoyees() {
     this.EmployeesService.getallEmployees().subscribe(
       (res) => {
-        this.data = res.productcate
+        res.employees.forEach((e) => {
+          e.hire_date = e.hire_date.split('T')[0]
+        })
+        this.data = res.employees
 
 
         console.log(this.data);
@@ -100,31 +104,32 @@ export class EmployeeslistComponent implements OnInit {
     )
   }
   onSaveConfirm(event) {
-    let id = event.data.category_id
-    this.EmployeesService.updateEmployees(id, event.newData).subscribe((res) => {
-      this.showToast('success', 'Thành công', 'Sửa loại thành công');
-      this.getEmpoyees();
-    },
-      (err) => {
-        this.showToast('danger', 'Thất bại', 'sửa thất bại ');
+    this.EmployeesService.updateEmployees(event.data.employee_id, event.newData).subscribe(
+      (res) => {
+        this.showToast('success', 'Thành công', 'Sửa thành công');
         this.getEmpoyees();
+      },
+      (err) => {
+        this.showToast('danger', 'Thất bại', 'Sửa thất bại');
 
-      })
+      },
+    )
   }
 
   onDeleteConfirm(event) {
-      let id = event.data.category_id;
+    if (window.confirm('Bạn có chắc chắn muốn xóa không?')) {
+      let id = event.data.employee_id;
       this.EmployeesService.deleteEmployees(id).subscribe((res) => {
           this.showToast('success', 'Thành công', 'Xóa loại thành công');
           this.getEmpoyees();
         },
         (err) => {
           this.showToast('danger', 'Thất bại', 'Xóa loại thất bại');
-        }
-      );
-    
-  }
-
+        },
+          
+        );
+      }
+    }
 
 
 

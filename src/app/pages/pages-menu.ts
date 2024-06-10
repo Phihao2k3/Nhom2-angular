@@ -93,7 +93,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'people-outline',
     children: [
       {
-        title: 'Thêm loại',
+        title: 'Thêm loại người ',
         icon: 'person-add-outline',
         link: '/pages/employees/addEmployees',
       },
