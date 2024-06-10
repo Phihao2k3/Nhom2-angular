@@ -1,6 +1,5 @@
 import { APP_CONFIG } from './app.config';
 import { IAPIEndpoint } from '../interfaces';
-
 export const API_BASE_URL = APP_CONFIG.apiBaseUrl;
 
 export const API_ENDPOINT: IAPIEndpoint = {
@@ -41,4 +40,20 @@ export const API_ENDPOINT: IAPIEndpoint = {
     delete: '/users/',
     detail: '/users/',
   },
+  employees: {
+    base: API_BASE_URL + '/' + ' employees',
+    list: '/employees/',
+    create: '/employees/',
+    update: '/employees/',
+    delete: '/employees/',
+    detail: '/employees/',
+  },
+  stores: {
+    base: API_BASE_URL + '/' + ' stores',
+    list: '/stores/',
+    create: '/stores/',
+    update: '/stores/',
+    delete: '/stores/',
+    detail: '/stores/',
+  }
 };

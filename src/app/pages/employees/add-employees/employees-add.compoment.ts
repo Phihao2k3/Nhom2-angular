@@ -1,62 +1,87 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { EmployeesService } from 'app/@core/services/apis/employees.service';
 import { Router } from '@angular/router';
-
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'; // Sử dụng FormBuilder để tạo FormGroup
+import { IEmployee } from 'app/@core/interfaces/employee.interface';
 import {
   NbToastrService,
   NbComponentStatus,
   NbGlobalPhysicalPosition,
 } from '@nebular/theme';
+import { StoreService } from 'app/@core/services/apis/store.service';
+
 @Component({
-  selector: 'app-employees-add',
-  templateUrl:'./employees-add.compoment.html',
+  selector: 'app-employeeadd',
+  templateUrl: './employees-add.compoment.html',
   styleUrls: ['./employees-add.compoment.scss']
 })
 export class EmployeesAddComponent {
   formEmployees: FormGroup;
-  constructor(private employees: EmployeesService, private router: Router,private toastrService: NbToastrService) {
-    this.formEmployees = new FormGroup({
-      first_name: new FormControl('', Validators.required),
-      last_name: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
-      phone_number: new FormControl('', Validators.required),
-      hire_date: new FormControl('', Validators.required),
-      job_title: new FormControl('', Validators.required),
-      salary: new FormControl('', Validators.required),
-      store_id : new FormControl('', Validators.required),
-    })
+  
+   storelist: { store_id: number, store_name: string }[] = [];
+
+  constructor(
+    private Emp: EmployeesService,
+    private router: Router,
+    private toastrService: NbToastrService,
+    private formBuilder: FormBuilder,
+    private store: StoreService
+  ) {
+    this.formEmployees = this.formBuilder.group({
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone_number: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      hire_date: ['', Validators.required],
+      job_title: ['', Validators.required],
+      salary: ['', [Validators.required, Validators.min(0)]],
+      store_id: ['', Validators.required],
+    });
+    // this.getEmployees();
+    this.getStore();
   }
 
-
-
   onSubmit() {
-
     if (this.formEmployees.valid) {
-      this.employees.createEmployees(this.formEmployees.value).subscribe((res) => {
-        this.toastrService.show('Thêm Loại thành công', 'Thành công', {
-          status: 'success',
-          position: NbGlobalPhysicalPosition.TOP_RIGHT,
-        });
-        this.router.navigate(['/pages/categories/listCategory'])
-      },
+      this.Emp.createEmployees(this.formEmployees.value).subscribe(
+        (res) => {
+          this.showToast('success', 'Thành công', 'Thêm nhân viên thành công');
+          this.router.navigate(['pages/employees/listEmployees']);
+        },
         (err) => {
-          this.toastrService.show('thêm thất bại', 'thất bại', {
-            status: 'danger',
-            position: NbGlobalPhysicalPosition.TOP_RIGHT,
-          });
           console.log(err);
+          this.showToast('danger', 'Thất bại', 'Thêm nhân viên thất bại');
         }
-      )
+      );
+    } else {
+      this.showToast('danger', 'Lỗi', 'Vui lòng điền đầy đủ thông tin cần thiết');
     }
-    else {
-      this.toastrService.show('Vui lòng nhập đủ thông tin', 'thất bại', {
-        status: 'danger',
-        position: NbGlobalPhysicalPosition.TOP_RIGHT,
-      });
-    }
+  }
 
-    console.log(this.formEmployees.value);
+  getEmployees() {
+    this.Emp.getallEmployees().subscribe(
+      (res) => {
+        this.formEmployees = res.employeelist;
+        console.log(this.formEmployees);
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
+
+  getStore() {
+    this.store.getAllStore().subscribe(res => {
+      this.storelist = res.stores;
+     ;this.storelist.forEach((store) => {
+      console.log(store);
+      
+     })
+    },
+      (err) => {
+        console.log(err);
+      });
+
   }
   private showToast(status: NbComponentStatus, title: string, message: string) {
     this.toastrService.show(message, title, {
@@ -64,5 +89,6 @@ export class EmployeesAddComponent {
       position: NbGlobalPhysicalPosition.TOP_RIGHT,
     });
   }
-}
 
+
+}
