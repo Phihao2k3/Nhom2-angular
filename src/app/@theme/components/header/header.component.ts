@@ -1,17 +1,20 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
-
+import {
+  NbMediaBreakpointsService,
+  NbMenuService,
+  NbSidebarService,
+  NbThemeService,
+} from '@nebular/theme';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import {LayoutService} from "../../../@core/services/common/layout.service";
-
+import { LayoutService } from '../../../@core/services/common/layout.service';
+import { AuthService } from 'app/@core/services/apis';
 @Component({
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
   user: any;
@@ -29,33 +32,45 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
 
   constructor(
     private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
     private themeService: NbThemeService,
     private layoutService: LayoutService,
-    private breakpointService: NbMediaBreakpointsService
-  ) { }
+    private breakpointService: NbMediaBreakpointsService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
-    this.user = {name: 'Alibaba', picture: 'assets/images/account.png'}
+    this.user = { name: 'Alibaba', picture: 'assets/images/account.png' };
     const { xl } = this.breakpointService.getBreakpointsMap();
-    this.themeService.onMediaQueryChange()
-        .pipe(
-            map(([, currentBreakpoint]) => currentBreakpoint.width < xl),
-            takeUntil(this.destroy$),
-        )
-        .subscribe((isLessThanXl: boolean) => this.userPictureOnly = isLessThanXl);
 
-    this.themeService.onThemeChange()
-        .pipe(
-            map(({ name }) => name),
-            takeUntil(this.destroy$),
-        )
-        .subscribe(themeName => this.currentTheme = themeName);
+    this.themeService
+      .onMediaQueryChange()
+      .pipe(
+        map(([, currentBreakpoint]) => currentBreakpoint.width < xl),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(
+        (isLessThanXl: boolean) => (this.userPictureOnly = isLessThanXl)
+      );
+
+    this.themeService
+      .onThemeChange()
+      .pipe(
+        map(({ name }) => name),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((themeName) => (this.currentTheme = themeName));
+
+    // Subscribe to menu item clicks
+    this.menuService
+      .onItemClick()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((event) => this.onMenuItemClick(event.item.title));
   }
 
   ngOnDestroy() {
@@ -76,5 +91,26 @@ export class HeaderComponent implements OnInit, OnDestroy {
   navigateHome() {
     this.menuService.navigateHome();
     return false;
+  }
+
+  onMenuItemClick(title: string) {
+    if (title === 'Log out') {
+      this.logout();
+    }
+  }
+
+  logout() {
+    // Implement your logout logic here
+    this.authService.logout().subscribe({
+      next: (res) => {
+        console.log(res);
+        
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+
+    // this.router.navigate(['/auth/login']); // Add your router's navigate method
   }
 }
