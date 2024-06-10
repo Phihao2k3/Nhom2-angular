@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from "./dashboard/dashboard.component";
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [{
   path: '',
@@ -15,6 +16,7 @@ const routes: Routes = [{
     },
     {
       path: 'user',
+      data: { breadcrumb: 'User' },
       loadChildren: () => import("./user/user.module").then(m => m.UserModule)
     },
     {
@@ -28,6 +30,16 @@ const routes: Routes = [{
     {
       path: 'categories',
       loadChildren: () => import("./categories/categories.module").then(m => m.categoriesModule)
+    },
+    {
+      path: 'store',
+      data: { breadcrumb: 'Store' },
+      loadChildren: () => import("./stores/store.module").then(m => m.StoreModule)
+    },
+    {
+      path: 'profile',
+      component: ProfileComponent,
+      data: { breadcrumb: 'Profile' },
     },
   ],
 }];

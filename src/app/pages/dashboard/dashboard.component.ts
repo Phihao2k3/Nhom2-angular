@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ngx-dashboard',
@@ -6,6 +6,9 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnInit {
-  ngOnInit(): void { }
+
+  ngOnInit(): void {
+   
+  }
 
 }

@@ -42,7 +42,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -15,7 +15,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'layout-outline',
     children: [
       {
-        title: 'Thêm User',
+        title: 'Thêm người dùng',
         link: '/pages/user/adduser',
       },
       {
@@ -63,6 +63,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Hiển thị danh sách',
         link: '/pages/categories/listCategory',
+      },
+    ],
+  },
+  {
+    title: 'Stores',
+    icon: 'layout-outline',
+    children: [
+      {
+        title: 'Thêm cửa hàng',
+        link: '/pages/store/addstore',
+      },
+      {
+        title: 'Hiển thị danh sách',
+        link: '/pages/store/liststore',
       },
     ],
   },
