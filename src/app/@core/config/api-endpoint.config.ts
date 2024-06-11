@@ -58,4 +58,12 @@ export const API_ENDPOINT: IAPIEndpoint = {
     delete: '/stores/',
     detail: '/stores/',
   },
+  product: {
+    base: API_BASE_URL + '/' + ' product',
+    list: '/product/',
+    create: '/product/',
+    update: '/product/',
+    delete: '/product/',
+    detail: '/product/',
+  },
 };

@@ -49,6 +49,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./employees/employees.module').then((m) => m.employeesModule),
       },
+      {
+        path: 'store',
+        data: { breadcrumb: 'Store' },
+        loadChildren: () => import("./stores/store.module").then(m => m.StoreModule)
+      },
 
       {
         path: 'profile',
