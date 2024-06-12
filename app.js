@@ -1,13 +1,12 @@
 const cors = require("cors");
 const express = require("express");
-
 const bodyParser = require("body-parser");
 const routes = require("./src/app/routes");
 const multer = require('multer');
 
 const app = express();
 const path = require("path");
-const port = 2904;
+const port = 1204;
 app.use(cors());
 
 app.use(express.static(path.join(__dirname, "uploads")));

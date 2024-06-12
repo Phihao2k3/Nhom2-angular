@@ -118,7 +118,7 @@ export class AuthService extends ApiService {
     return false;
   }
 
-  override getToken() {
+  override getToken() { 
     return this.localStorageService.getItem<any>(LOCALSTORAGE_KEY.token);
   
   }

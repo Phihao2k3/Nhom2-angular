@@ -5,7 +5,7 @@ class employees {
   }
   static async getallemployees() {
     return new Promise((resolve, reject) => {
-      db.query("SELECT * FROM product_categories", function (error, results, fields) {
+      db.query("SELECT * FROM employees", function (error, results, fields) {
         if (error) throw error;
         resolve(results);
       });
@@ -14,7 +14,7 @@ class employees {
   static async getemployeesbyid(id) {
     return new Promise((resolve, reject) => {
       db.query(
-        "SELECT * FROM product_categories WHERE employee_id  = ?",
+        "SELECT * FROM employees WHERE employee_id  = ?",
         [id],
         function (error, results, fields) {
           if (error) throw error;
@@ -26,7 +26,7 @@ class employees {
   static async addemployees(data) {
     return new Promise((resolve, reject) => {
       db.query(
-        "INSERT INTO product_categories SET ?",
+        "INSERT INTO employees SET ?",
         data,
         function (error, results, fields) {
           if (error) throw error;
@@ -38,7 +38,7 @@ class employees {
   static async updateemployees(id, data) {
     return new Promise((resolve, reject) => {
       db.query(
-        "UPDATE product_categories SET ? WHERE employee_id  = ?",
+        "UPDATE employees SET ? WHERE employee_id   = ?",
         [data, id],
         function (error, results, fields) {
           if (error) throw error;
@@ -50,7 +50,7 @@ class employees {
   static deleteemployees(id) {
     return new Promise((resolve, reject) => {
       db.query(
-        "DELETE FROM product_categories WHERE employee_id  = ?",
+        "DELETE FROM employees WHERE employee_id  = ?",
         [id],
         function (error, results, fields) {
           if (error) throw error;

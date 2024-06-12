@@ -5,6 +5,8 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { UserRoutingModule, routedComponents } from './user-routing.module';
+// import { PaginatorComponent } from 'app/@theme/components/paginator/paginator.component';
+import { PaginatorModule } from 'app/@theme/components/paginator/paginator.module';
 // import { FsIconComponent } from './list-user/list-user.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -25,7 +27,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     NbSelectModule,
     NbUserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PaginatorModule
   ],
   declarations: [
     ...routedComponents,

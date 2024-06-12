@@ -93,7 +93,7 @@ export class StoreInventoryListComponent implements OnInit {
         editable: false,
       },
       quantity: {
-        title: 'Giá',
+        title: 'Số lượng',
         type: 'number',
         // editable: false,
       },

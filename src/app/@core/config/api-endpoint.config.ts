@@ -1,6 +1,5 @@
 import { APP_CONFIG } from './app.config';
 import { IAPIEndpoint } from '../interfaces';
-
 export const API_BASE_URL = APP_CONFIG.apiBaseUrl;
 
 export const API_ENDPOINT: IAPIEndpoint = {
@@ -17,21 +16,14 @@ export const API_ENDPOINT: IAPIEndpoint = {
     delete: '/productcate/',
     detail: '/productcate/',
   },
-  product: {
-    base: API_BASE_URL + '/' + 'product',
-    list: '/product/',
-    create: '/product/',
-    update: '/product/',
-    delete: '/product/',
-    detail: '/product/',
-  },
   order: {
     base: API_BASE_URL + '/' + 'orders',
     list: '/orders/',
     create: '/orders/',
     update: '/orders/',
     delete: '/orders/',
-    detail: '/orders/',
+    detail: '/order_details/',
+    doanhthu: '/orders/doanhthusanpham/',
   },
   users: {
     base: API_BASE_URL + '/' + ' users',
@@ -49,6 +41,15 @@ export const API_ENDPOINT: IAPIEndpoint = {
     delete: '/store_inventory/',
     detail: '/store_inventory/',
   },
+
+  employees: {
+    base: API_BASE_URL + '/' + ' employees',
+    list: '/employees/',
+    create: '/employees/',
+    update: '/employees/',
+    delete: '/employees/',
+    detail: '/employees/',
+  },
   stores: {
     base: API_BASE_URL + '/' + ' stores',
     list: '/stores/',
@@ -56,5 +57,13 @@ export const API_ENDPOINT: IAPIEndpoint = {
     update: '/stores/',
     delete: '/stores/',
     detail: '/stores/',
+  },
+  product: {
+    base: API_BASE_URL + '/' + ' product',
+    list: '/product/',
+    create: '/product/',
+    update: '/product/',
+    delete: '/product/',
+    detail: '/product/',
   },
 };
