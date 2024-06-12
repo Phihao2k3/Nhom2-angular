@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <nb-card class="p-4" status="success">
+        <nb-card-header class="text-center">Tổng số sản phẩm</nb-card-header>
+        <nb-card-body class="text-center">
+          <p>{{ Totalproduct }}</p>
+        </nb-card-body>
+      </nb-card>
+    </div>
+    <div class="col-md-4">
+      <nb-card class="p-4" status="danger">
+        <nb-card-header class="text-center">Tổng số đơn hàng</nb-card-header>
+        <nb-card-body class="text-center">
+          <p>{{ Totalorder }}</p>
+        </nb-card-body>
+      </nb-card>
+    </div>
+    <div class="col-md-4">
+      <nb-card class="p-4" status="warning">
+        <nb-card-header class="text-center">Doanh thu</nb-card-header>
+        <nb-card-body class="text-center">
+          <p>{{ totalmoney }}</p>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <nb-card>
+        <nb-card-header>Số liệu đơn hàng </nb-card-header>
+        <nb-card-body>
+          <ngx-chartjs-pie></ngx-chartjs-pie>
+        </nb-card-body>
+      </nb-card>
+    </div>
+    <div class="col-lg-6">
+      <nb-card>
+        <nb-card-header>Doanh thu qua từng tháng</nb-card-header>
+        <nb-card-body>
+          <ngx-chartjs-bar></ngx-chartjs-bar>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+</div>

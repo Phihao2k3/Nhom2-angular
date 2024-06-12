@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { OrderComponent } from './order.component';
 import { AddorderComponent } from './order-add/addorder.component';
 import { OrderlistComponent } from './order-list/orderlist.component';
+import { orderdetaillistComponent } from './oder-detail/order-detail-list.component';
 
 const routes: Routes = [{
   path: '',
@@ -17,6 +18,10 @@ const routes: Routes = [{
       path: 'listorder',
       component: OrderlistComponent,
     },
+    {
+      path: 'oder-detail/:id',
+      component: orderdetaillistComponent
+    }
   ],
 }];
 
@@ -30,4 +35,5 @@ export const routedComponents = [
   OrderComponent,
   AddorderComponent,
   OrderlistComponent,
+  orderdetaillistComponent
 ];

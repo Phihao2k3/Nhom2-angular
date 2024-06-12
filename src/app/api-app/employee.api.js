@@ -1,4 +1,4 @@
-const employeesclass = require("../../app/@core/model/product_categories");
+const employeesclass = require("../../app/@core/model/employees");
 exports.getall = async (req, res) => {
   let employees = await employeesclass.getallemployees();
   res.status(200).json({

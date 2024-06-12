@@ -5,7 +5,7 @@ class store_inventory {
   }
   static async getallstore_inventory() {
     return new Promise((resolve, reject) => {
-      db.query("SELECT * FROM product_categories", function (error, results, fields) {
+      db.query("SELECT * FROM store_inventory", function (error, results, fields) {
         if (error) throw error;
         resolve(results);
       });
@@ -14,7 +14,7 @@ class store_inventory {
   static async getstore_inventorybyid(id) {
     return new Promise((resolve, reject) => {
       db.query(
-        "SELECT * FROM product_categories WHERE inventory_id  = ?",
+        "SELECT * FROM store_inventory WHERE inventory_id  = ?",
         [id],
         function (error, results, fields) {
           if (error) throw error;
@@ -26,7 +26,7 @@ class store_inventory {
   static async addstore_inventory(data) {
     return new Promise((resolve, reject) => {
       db.query(
-        "INSERT INTO product_categories SET ?",
+        "INSERT INTO store_inventory SET ?",
         data,
         function (error, results, fields) {
           if (error) throw error;
@@ -38,7 +38,7 @@ class store_inventory {
   static async updatestore_inventory(id, data) {
     return new Promise((resolve, reject) => {
       db.query(
-        "UPDATE product_categories SET ? WHERE inventory_id  = ?",
+        "UPDATE store_inventory SET ? WHERE inventory_id  = ?",
         [data, id],
         function (error, results, fields) {
           if (error) throw error;
@@ -50,7 +50,7 @@ class store_inventory {
   static deletestore_inventory(id) {
     return new Promise((resolve, reject) => {
       db.query(
-        "DELETE FROM product_categories WHERE inventory_id  = ?",
+        "DELETE FROM store_inventory WHERE inventory_id  = ?",
         [id],
         function (error, results, fields) {
           if (error) throw error;

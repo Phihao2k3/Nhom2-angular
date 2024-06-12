@@ -1,9 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
-
+import {
+  NbMediaBreakpointsService,
+  NbMenuService,
+  NbSidebarService,
+  NbThemeService,
+} from '@nebular/theme';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { LayoutService } from "../../../@core/services/common/layout.service";
+import { LayoutService } from '../../../@core/services/common/layout.service';
+import { AuthService } from 'app/@core/services/apis';
+
 import { LocalStorageService } from 'app/@core/services/common';
 import { LOCALSTORAGE_KEY, ROUTER_CONFIG } from 'app/@core/config';
 import { Router } from '@angular/router';
@@ -15,7 +21,6 @@ import { __values } from 'tslib';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
   user: any;
@@ -33,8 +38,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [{ title: 'Profile', }, { title: 'Log out' }];
-
+  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
+  
 
 
   constructor(
