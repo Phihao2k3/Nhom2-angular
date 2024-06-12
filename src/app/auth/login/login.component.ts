@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     private spinner: SpinnerService,
     private auth: AuthService,
     private storageService: LocalStorageService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -49,16 +49,21 @@ export class LoginComponent implements OnInit {
           error: this.handleLoginFailed.bind(this),
         });
     }
- 
+
   }
 
   protected handleLoginSuccess(res) {
-    this.storageService.setItem(
-      LOCALSTORAGE_KEY.userInfo,
-      res.users[0].username
-    );
+    // let user = res.users[0];
+
+    this.storageService.setItem(LOCALSTORAGE_KEY.user_id,res.users[0].user_id);
+    this.storageService.setItem(LOCALSTORAGE_KEY.username,res.users[0].username);
+    this.storageService.setItem(LOCALSTORAGE_KEY.first_name,res.users[0].first_name);
+    this.storageService.setItem(LOCALSTORAGE_KEY.last_name,res.users[0].last_name);
+    this.storageService.setItem(LOCALSTORAGE_KEY.email,res.users[0].email);
+
     this.storageService.setItem(LOCALSTORAGE_KEY.token, res.token);
-    this.router.navigate([ROUTER_CONFIG.pages]).then();
+
+    this.router.navigate(['/pages/dashboard'],{}).then();
     this.spinner.hide();
   }
 
@@ -68,4 +73,6 @@ export class LoginComponent implements OnInit {
       { status: 'danger', message: 'Tài khoản hoặc mật khẩu không chính xác' },
     ];
   }
+
+
 }

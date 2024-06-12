@@ -90,21 +90,21 @@ export class CategorieslistComponent implements OnInit {
   }
 
   onDeleteConfirm(event) {
+    if (window.confirm('Bạn có chắc chắn muốn xóa không?')) {
       let id = event.data.category_id;
-      this.CategoriesService.deleteCaterogies(id).subscribe((res) => {
-          this.showToast('success', 'Thành công', 'Xóa loại thành công');
+      this.CategoriesService.deleteCaterogies(id).subscribe(
+        (res) => {
+          this.showToast('success', 'Thành công', 'Xóa sản phẩm thành công');
           this.getCategory();
         },
         (err) => {
-          this.showToast('danger', 'Thất bại', 'Xóa loại thất bại');
+          this.showToast('danger', 'Thất bại', 'Xóa sản phẩm thất bại');
         }
       );
-    
+    } else {
+      event.confirm.reject();
+    }
   }
-
-
-
-
 
 
 

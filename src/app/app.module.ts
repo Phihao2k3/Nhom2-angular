@@ -44,6 +44,8 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
