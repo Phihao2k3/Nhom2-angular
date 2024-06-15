@@ -1,4 +1,6 @@
-const store_inventoryclass = require("../../app/@core/model/product_categories");
+const store_inventoryclass = require("../../app/@core/model/store_inventory");
+
+
 exports.getall = async (req, res) => {
   let store_inventory = await store_inventoryclass.getallstore_inventory();
   res.status(200).json({

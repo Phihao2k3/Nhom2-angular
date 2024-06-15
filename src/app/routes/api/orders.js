@@ -14,6 +14,7 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
 });
+router.get("/doanhthusanpham", ordersapi.getdoanhthusanpham);
 router.delete("/:id",ordersapi.deleteorders)
 router.put("/:id", ordersapi.updateorders);
 router.post("/", ordersapi.addorders);

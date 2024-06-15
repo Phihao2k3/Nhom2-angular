@@ -16,21 +16,14 @@ export const API_ENDPOINT: IAPIEndpoint = {
     delete: '/productcate/',
     detail: '/productcate/',
   },
-  product: {
-    base: API_BASE_URL + '/' + 'product',
-    list: '/product/',
-    create: '/product/',
-    update: '/product/',
-    delete: '/product/',
-    detail: '/product/',
-  },
   order: {
     base: API_BASE_URL + '/' + 'orders',
     list: '/orders/',
     create: '/orders/',
     update: '/orders/',
     delete: '/orders/',
-    detail: '/orders/',
+    detail: '/order_details/',
+    doanhthu: '/orders/doanhthusanpham/',
   },
   users: {
     base: API_BASE_URL + '/' + ' users',
@@ -40,6 +33,15 @@ export const API_ENDPOINT: IAPIEndpoint = {
     delete: '/users/',
     detail: '/users/',
   },
+  storeinventory: {
+    base: API_BASE_URL + '/' + ' store_inventory',
+    list: '/store_inventory/',
+    create: '/store_inventory/',
+    update: '/store_inventory/',
+    delete: '/store_inventory/',
+    detail: '/store_inventory/',
+  },
+
   employees: {
     base: API_BASE_URL + '/' + ' employees',
     list: '/employees/',
@@ -55,5 +57,13 @@ export const API_ENDPOINT: IAPIEndpoint = {
     update: '/stores/',
     delete: '/stores/',
     detail: '/stores/',
-  }
+  },
+  product: {
+    base: API_BASE_URL + '/' + ' product',
+    list: '/product/',
+    create: '/product/',
+    update: '/product/',
+    delete: '/product/',
+    detail: '/product/',
+  },
 };

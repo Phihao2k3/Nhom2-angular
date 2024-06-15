@@ -3,24 +3,24 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { NgxEchartsModule } from 'ngx-echarts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  
   NbSidebarModule,
   NbMenuModule,
   NbDatepickerModule,
-  NbDialogModule, NbWindowModule, NbToastrModule, NbChatModule,
+  NbDialogModule,
+  NbWindowModule,
+  NbToastrModule,
+  NbChatModule,
 } from '@nebular/theme';
-import {HttpClientModule} from "@angular/common/http";
-import {CoreModule} from "./@core/core.module";
-import {ThemeModule} from "./@theme/theme.module";
+import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from './@core/core.module';
+import { ThemeModule } from './@theme/theme.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+
 @NgModule({
-  declarations: [
-    AppComponent,
-  
-  ],
+  declarations: [AppComponent],
   imports: [
     FormsModule,
     ReactiveFormsModule,
@@ -41,8 +41,13 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -20,10 +20,7 @@ export class OrderService {
     });
   }
   createOrder(Order): Observable<any> {
-    return this.http.post<any>(
-      API_BASE_URL + API_ENDPOINT.order.create,
-      Order
-    );
+    return this.http.post<any>(API_BASE_URL + API_ENDPOINT.order.create, Order);
   }
   updateOrder(id: number, Order): Observable<any> {
     return this.http.put<any>(
@@ -32,13 +29,35 @@ export class OrderService {
     );
   }
   deleteOrder(id: Number): Observable<any> {
-    return this.http.delete<any>(
-      API_BASE_URL + API_ENDPOINT.order.delete + id
-    );
+    return this.http.delete<any>(API_BASE_URL + API_ENDPOINT.order.delete + id);
   }
   getOrderById(id: number): Observable<any> {
-    return this.http.get<any>(
-      API_BASE_URL + API_ENDPOINT.order.detail + id
+    return this.http.get<any>(API_BASE_URL + API_ENDPOINT.order.detail + id);
+  }
+  // Order Detail
+  getOrderDetailById(id: number): Observable<any> {
+    return this.http.get<any>(API_BASE_URL + API_ENDPOINT.order.detail + id);
+  }
+  addOrderDetail(orderDetail): Observable<any> {
+    return this.http.post<any>(
+      API_BASE_URL + API_ENDPOINT.order.detail,
+      orderDetail
     );
+  }
+  getallOrderDetail(): Observable<any> {
+    return this.http.get(API_BASE_URL + API_ENDPOINT.order.detail, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+    });
+  }
+  getdoanhthusoluong(): Observable<any> {
+    return this.http.get(API_BASE_URL + API_ENDPOINT.order.doanhthu, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+    });
   }
 }

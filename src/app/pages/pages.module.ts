@@ -6,6 +6,7 @@ import {PagesComponent} from './pages.component';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {PagesRoutingModule} from './pages-routing.module';
 import {PaginatorModule} from "../@theme/components/paginator/paginator.module";
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -19,7 +20,7 @@ import {PaginatorModule} from "../@theme/components/paginator/paginator.module";
   ],
   declarations: [
     PagesComponent,
-  
+    ProfileComponent,
   ],
   providers: []
 })

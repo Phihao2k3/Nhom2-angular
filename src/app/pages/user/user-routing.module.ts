@@ -11,10 +11,12 @@ const routes: Routes = [{
   children: [
     {
       path: 'adduser',
+      data: { breadcrumb: 'Thêm người dùng' },
       component: AddUserComponent,
     },
     {
       path: 'listuser',
+      data: { breadcrumb: 'Hiển thị danh sách' },
       component: ListUserComponent,
     },
   ],

@@ -8,7 +8,7 @@ exports.getall = async (req, res) => {
 exports.getbyid = async (req, res) => {
   let id = req.params.id;
   let orders = await orders_class.getordersbyid(id);
-  if (orders.length  == 0) {
+  if (orders.length == 0) {
     return res.status(404).json({ message: "Không tìm thấy hóa đơn" });
   }
   res.status(200).json({
@@ -25,6 +25,9 @@ exports.addorders = async (req, res) => {
 exports.updateorders = async (req, res) => {
   let id = req.params.id;
   let orders = req.body;
+  // xóa trường detail để tránh lỗi
+  delete orders.detail;
+  delete orders.index;
   let update = await orders_class.updateorders(id, orders);
   if (update.affectedRows == 0) {
     return res.status(404).json({ message: "Không tìm thấy hóa đơn" });
@@ -64,4 +67,9 @@ exports.addorder_detail = async (req, res) => {
     order_detail: result,
   });
 };
-
+exports.getdoanhthusanpham = async (req, res) => {
+  let doanhthu = await order_detail_class.getdoanhthusanpham();
+  res.status(200).json({
+    doanhthu: doanhthu,
+  });
+}

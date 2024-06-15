@@ -62,5 +62,27 @@ class order_details {
       );
     });
   }
+  static getdoanhthusanpham() {
+    return new Promise((resolve, reject) => {
+      db.query(
+        `SELECT
+    DATE_FORMAT(o.order_date, '%Y-%m') AS month,
+    SUM(od.quantity * od.price) AS total_revenue
+FROM
+    orders o
+JOIN
+    order_details od ON o.order_id = od.order_id
+WHERE
+    o.status = 'Thành công'
+GROUP BY
+    DATE_FORMAT(o.order_date, '%Y-%m');
+`,
+        function (error, results, fields) {
+          if (error) reject(error);
+          resolve(results);
+        }
+      );
+    });
+  }
 }
 module.exports = order_details;
