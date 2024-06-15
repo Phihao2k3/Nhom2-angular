@@ -45,4 +45,8 @@ export class EmployeesService {
       API_BASE_URL + API_ENDPOINT.employees.detail + id
     );
   }
+  timkiem(keyword:string){
+    return this.http.get<any>(
+      API_BASE_URL + API_ENDPOINT.employees.search +"?keyword=" +keyword )
+  }
 }

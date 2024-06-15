@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { StoreInventoryComponent } from './store-inventory.component'; 
 import { StoreInventoryAddComponent } from './store_inventory-add/store_inventory-add.component';
 import { StoreInventoryListComponent } from './store_inventory-list/store_inventory-list.component'; 
-
+import { StoreInventoryUpdateComponent } from './store_inventory-update/store_inventory-update.component';
 const routes: Routes = [{
   path: '',
   component: StoreInventoryComponent,
@@ -15,6 +15,10 @@ const routes: Routes = [{
     {
       path: 'store-inventory-list',
       component: StoreInventoryListComponent,
+    },
+    {
+      path: 'store-inventory-update/:id',
+      component: StoreInventoryUpdateComponent,
     },
   ],
 }];
@@ -29,4 +33,5 @@ export const routedComponents = [
     StoreInventoryComponent,
  StoreInventoryAddComponent,
  StoreInventoryListComponent,
+ StoreInventoryUpdateComponent
 ];

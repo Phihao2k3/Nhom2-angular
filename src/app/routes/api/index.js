@@ -9,6 +9,7 @@ const stores = require("./stores");
 const store_inventory = require("./store_inventory");
 const employees = require("./employees");
 const order_details = require("./order_details");
+const attendance = require("./attendance");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./src/uploads");
@@ -28,4 +29,6 @@ router.use("/stores", stores);
 router.use("/store_inventory", store_inventory);
 router.use("/employees", employees);
 router.use("/order_details", order_details);
+router.use("/attendance", attendance);
+
 module.exports = router;
