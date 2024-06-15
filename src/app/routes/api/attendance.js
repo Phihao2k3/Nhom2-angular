@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 
-const employeesapi = require("../../api-app/employee.api");
+const attendanceapi = require("../../api-app/attendance.api");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./uploads");
@@ -14,10 +14,9 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
 });
-router.get("/timkiem",employeesapi.timkiem)
-router.delete("/:id", employeesapi.deleteemployees);
-router.put("/:id", employeesapi.updateemployees);
-router.post("/", employeesapi.addemployees);
-router.get("/:id", employeesapi.getbyid);
-router.get("/", employeesapi.getall);
+router.delete("/:id", attendanceapi.deleteattendance);
+router.put("/:id", attendanceapi.updateattendance);
+router.post("/", attendanceapi.addattendance);
+router.get("/:id", attendanceapi.getbyid);
+router.get("/", attendanceapi.getall);
 module.exports = router;

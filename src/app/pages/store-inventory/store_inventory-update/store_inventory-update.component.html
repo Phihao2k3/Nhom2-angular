@@ -4,14 +4,14 @@
   </nb-card-header>
   <nb-card-body>
     <div class="container">
-      <form [formGroup]="formInventory" (ngSubmit)="onSubmit()">
+      <form [formGroup]="formUpdate" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="storeId">Mã Cửa Hàng:</label>
           <select class="form-control" id="storeId" formControlName="store_id">
             <option value="" disabled selected>Chọn mã cửa hàng</option>
-            <option *ngFor="let items of storelist" [value]="items.store_id">{{ items.store_name }}</option>
+            <option *ngFor="let store of storelist" [value]="store.store_id">{{ store.store_name }}</option>
           </select>
-          <div *ngIf="formInventory.get('store_id').errors && formInventory.get('store_id').touched" class="text-danger">
+          <div *ngIf="formUpdate.get('store_id').errors && formUpdate.get('store_id').touched" class="text-danger">
             Mã cửa hàng là bắt buộc.
           </div>
         </div>
@@ -19,18 +19,18 @@
           <label for="productId">Mã Sản Phẩm:</label>
           <select class="form-control" id="productId" formControlName="product_id">
             <option value="" disabled selected>Chọn mã sản phẩm</option>
-            <option *ngFor="let item of productlist" [value]="item.product_id">{{ item.title }}</option>
+            <option *ngFor="let product of productlist" [value]="product.product_id">{{ product.title }}</option>
           </select>
-          <div *ngIf="formInventory.get('product_id').errors && formInventory.get('product_id').touched" class="text-danger">
+          <div *ngIf="formUpdate.get('product_id').errors && formUpdate.get('product_id').touched" class="text-danger">
             Mã sản phẩm là bắt buộc.
           </div>
         </div>
         <div class="form-group">
           <label for="quantity">Số Lượng:</label>
           <input type="number" class="form-control" id="quantity" formControlName="quantity">
-          <div *ngIf="formInventory.get('quantity').errors && formInventory.get('quantity').touched" class="text-danger">
-            <div *ngIf="formInventory.get('quantity').errors.required">Số lượng là bắt buộc.</div>
-            <div *ngIf="formInventory.get('quantity').errors.min">Số lượng phải lớn hơn 0.</div>
+          <div *ngIf="formUpdate.get('quantity').errors && formUpdate.get('quantity').touched" class="text-danger">
+            <div *ngIf="formUpdate.get('quantity').errors.required">Số lượng là bắt buộc.</div>
+            <div *ngIf="formUpdate.get('quantity').errors.min">Số lượng phải lớn hơn 0.</div>
           </div>
         </div>
         <button type="submit" class="btn btn-primary">Cập Nhật Kho Hàng</button>

@@ -22,7 +22,27 @@ class employees {
         }
       );
     });
+  } static async timkiemnhanvien(name) {
+    return new Promise((resolve, reject) => {
+      // Construct the search term with % around the name
+      const searchTerm = `%${name}%`;
+
+      // Use parameterized query with LIKE for wildcard matching
+      db.query(
+        'SELECT * FROM employees WHERE last_name LIKE ?',
+        [searchTerm],
+        (error, results, fields) => {
+          if (error) {
+            reject(error); // Reject promise if there's an error
+          } else {
+            resolve(results); // Resolve with the query results
+          }
+        }
+      );
+    });
   }
+
+
   static async addemployees(data) {
     return new Promise((resolve, reject) => {
       db.query(

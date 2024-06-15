@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { ProfileComponent } from './profile/profile.component';
 import { PagesComponent } from './pages.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -42,6 +42,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./store-inventory/store_inventory.module').then(
             (m) => m.store_inventoryModule
+          ),
+      },
+      {
+        path: 'attendance',
+        loadChildren: () =>
+          import('./attendance/attendance.module').then(
+            (m) => m.AttendanceModule
           ),
       },
       {

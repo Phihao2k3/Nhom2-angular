@@ -49,6 +49,7 @@ export const API_ENDPOINT: IAPIEndpoint = {
     update: '/employees/',
     delete: '/employees/',
     detail: '/employees/',
+    search:'/employees/timkiem',
   },
   stores: {
     base: API_BASE_URL + '/' + ' stores',
@@ -65,5 +66,13 @@ export const API_ENDPOINT: IAPIEndpoint = {
     update: '/product/',
     delete: '/product/',
     detail: '/product/',
+  },
+  attendance: {
+    base: API_BASE_URL + '/' + ' attendance',
+    list: '/attendance/',
+    create: '/attendance/',
+    update: '/attendance/',
+    delete: '/attendance/',
+    detail: '/attendance/',
   },
 };
