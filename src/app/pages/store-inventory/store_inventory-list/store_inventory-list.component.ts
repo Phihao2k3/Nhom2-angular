@@ -97,7 +97,6 @@ export class StoreInventoryListComponent implements OnInit {
         type: 'number',
         // editable: false,
       },
-
       customColumn: {
         title: '',
         type: 'custom',
