@@ -4,13 +4,14 @@ import { NbCardModule, NbIconModule, NbInputModule, NbTreeGridModule, NbActionsM
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { ThemeModule } from '../../@theme/theme.module';
-import { StoreInventoryRoutingModule, routedComponents } from './store_inventory-routing.module';
+import { StoreInventoryRoutingModule, routedComponents } from './attendance-routing.module';
 // import { FsIconComponent } from './list-user/list-user.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { ButtonComponent } from './button/button.component';
-import { DeleteComponent } from './button/deletecomponent';
-import { EditComponent } from './button/EditComponent';
-import { StoreInventoryUpdateComponent } from './store_inventory-update/store_inventory-update.component';
+// import { ButtonComponent } from './button/button.component';
+// import { DeleteComponent } from './button/deletecomponent';
+// import { EditComponent } from './button/EditComponent';
+import { AttendanceComponent } from './attendance.component';
+import { AttendanceListComponent } from './attendance-list/attendance-list.component';
 @NgModule({
   imports: [
     NbCardModule,
@@ -35,13 +36,14 @@ import { StoreInventoryUpdateComponent } from './store_inventory-update/store_in
   ],
   declarations: [
     ...routedComponents,
-    ButtonComponent,
-    DeleteComponent,
-    EditComponent,
-    StoreInventoryUpdateComponent
+    // ButtonComponent,
+    // DeleteComponent,
+    // EditComponent,
+    AttendanceComponent,
+    AttendanceListComponent
     
    
     // FsIconComponent,
   ],
 })
-export class store_inventoryModule { }
+export class AttendanceModule { }

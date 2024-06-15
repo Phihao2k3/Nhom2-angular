@@ -118,4 +118,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
+  {
+    title: 'Attendance',
+    icon: 'layout-outline',
+    children: [
+      
+      {
+        title: 'Hiển thị danh sách',
+        link: '/pages/attendance/attendance-list',
+      },
+    ],
+  },
 ];

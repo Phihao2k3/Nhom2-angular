@@ -7,4 +7,5 @@ export interface IAPIEndpoint {
   storeinventory: any;
   employees: any;
   stores: any;
+  attendance: any;
 }

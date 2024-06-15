@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { StoreInventoryService } from 'app/@core/services/apis/store_inventory.service'; 
 import { NbToastrService, NbComponentStatus, NbGlobalPhysicalPosition } from '@nebular/theme';
 import { IStore_inventory } from 'app/@core/interfaces/store-inventory.interface';
+import { Action } from 'rxjs/internal/scheduler/Action';
+import { ButtonComponent } from '../button/button.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-store_inventory-list',
   templateUrl: './store_inventory-list.component.html',
@@ -16,7 +19,8 @@ export class StoreInventoryListComponent implements OnInit {
   }
   constructor(
     private storeInventory_Service: StoreInventoryService,
-    private toastrService: NbToastrService) {
+    private toastrService: NbToastrService,
+  private Router:Router) {
   }
 
   getall_StoreInventory() {
@@ -29,31 +33,22 @@ export class StoreInventoryListComponent implements OnInit {
       }
     )
   }
-  onSaveConfirm(event) {
-    this.storeInventory_Service.updateStoreInventory(event.data.inventory_id, event.newData).subscribe(
-      (res) => {
-        this.showToast('success', 'Thành công', 'Sửa thành công');
-        this.getall_StoreInventory();
-      },
-      (err) => {
-        this.showToast('danger', 'Thất bại', 'Sửa thất bại');
-
-      },
-    )
+  editProduct(id): void {
+    this.Router.navigate(['/pages/store-inventory/store-inventory-update/', id]);
   }
   onDeleteConfirm(event) {
-    if (window.confirm("Bạn có muốn tiếp tục xóa không ?")) {
-      this.storeInventory_Service.deleteStoreInventory(event.data.inventory_id).subscribe(
+     
+      this.storeInventory_Service.deleteStoreInventory(event.inventory_id).subscribe(
         (res) => {
-          this.showToast('success', 'Thành công', 'Xóa hóa đơn thành công');
-          event.confirm.resolve();
+       
+          this.getall_StoreInventory()
         },
         (err) => {
           this.showToast('danger', 'Thất bại', 'Xóa hóa đơn thất bại');
-          event.confirm.reject();
+       
         },
       )
-    }
+    
   }
   
   private showToast(status: NbComponentStatus, title: string, message: string) {
@@ -64,22 +59,7 @@ export class StoreInventoryListComponent implements OnInit {
   }
 
   settings = {
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true,
-
-    },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
+    
     columns: {
       store_id: {
         title: 'Mã cửa hàng',
@@ -97,8 +77,24 @@ export class StoreInventoryListComponent implements OnInit {
         type: 'number',
         // editable: false,
       },
-      
-    },
+      customColumn: {
+        title: '',
+        type: 'custom',
+        renderComponent: ButtonComponent,
+        filter: false,
+        sort: false,
+      },
+    },actions:
+    {
+      // Define actions column
+      title: 'Actions',
+      type: 'html',
+      position: 'right',
+      add: false,
+      edit: false,
+      delete: false,
+      selector: false,
+    }
     
   };
 }

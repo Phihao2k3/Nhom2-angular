@@ -1,0 +1,28 @@
+<nb-card>
+    <div class="col-12 d-flex input-group justify-content-center p-4">
+        <div class="col-8">
+            <input type="search" id="form1" class="form-control " (change)="searchUser($event)">
+        </div>
+        <button type="button" class="btn btn-primary col-2">
+            Tìm kiếm
+        </button>
+    </div>
+    <ul class="listuser col-12 p-4">
+        <li *ngFor="let items of Employeesdata" class="list_items">
+            <span>
+                {{ items.last_name }}
+            </span>
+            <button (click)="attendance(items.employee_id,items.last_name,items.store_id)" class="btn btn-primary">Chấm công</button>
+        </li>
+    </ul>
+
+</nb-card>
+<nb-card>
+    <nb-card-header>
+        Danh sách chấm công
+    </nb-card-header>
+    <nb-card-body>
+        <ng2-smart-table [settings]="settings" [source]="data">
+        </ng2-smart-table>
+    </nb-card-body>
+</nb-card>
