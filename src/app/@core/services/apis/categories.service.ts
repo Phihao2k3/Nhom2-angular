@@ -27,7 +27,7 @@ export class CategoriesService {
     );
   }
   updateCaterogies
-  (id: number, data): Observable<any> {
+  (id: number, data:any): Observable<any> {
     return this.http.put<any>(
       API_BASE_URL + API_ENDPOINT.categories.update + id,
       data
@@ -39,8 +39,7 @@ export class CategoriesService {
       API_BASE_URL + API_ENDPOINT.categories.delete + id
     );
   }
-  getCaterogies
-  ById(id: number): Observable<any> {
+  getCaterogiesById(id: number): Observable<any> {
     return this.http.get<any>(
       API_BASE_URL + API_ENDPOINT.categories.detail + id
     );

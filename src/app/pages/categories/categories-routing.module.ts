@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CategoriesComponent } from './categories.component';
 import { CategoriesAddComponent } from './add-categories/categories-add.compoment';
 import { CategorieslistComponent } from './list-categories/categories-list.compoment';
+import { CategoriesUpdateComponent } from './update-categories/categories-update.compoment';
 
 const routes: Routes = [{
   path: '',
@@ -17,6 +18,10 @@ const routes: Routes = [{
       path: 'listCategory',
       component: CategorieslistComponent,
     },
+    {
+      path: 'updateCategory/:id',
+      component: CategoriesUpdateComponent,
+    },
   ],
 }];
 
@@ -29,4 +34,4 @@ export class categoriesRoutingModule { }
 export const routedComponents = [
   CategoriesComponent,
   CategoriesAddComponent,
-  CategorieslistComponent];
+  CategorieslistComponent, CategoriesUpdateComponent];

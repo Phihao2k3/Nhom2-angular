@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { StoreService } from 'app/@core/services/apis/store.service';
 import { IStores } from 'app/@core/interfaces/stores.interface';
 import { NbToastrService, NbComponentStatus, NbGlobalPhysicalPosition } from '@nebular/theme';
-
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'ngx-tree-grid',
@@ -20,7 +20,8 @@ export class ListStoreComponent implements OnInit {
 
   constructor(
     private store_service: StoreService,
-    private toastrService: NbToastrService
+    private toastrService: NbToastrService,
+    private router: Router
   ) {
 
   }
@@ -35,8 +36,7 @@ export class ListStoreComponent implements OnInit {
   }
 
   onDeleteConfirm(event) {
-    if (window.confirm("Bạn có muốn tiếp tục xóa không ?")) {
-      this.store_service.deleteStore(event.data.store_id).subscribe(
+      this.store_service.deleteStore(event.store_id).subscribe(
         (res) => {
           this.showToast('success', 'Thành công', 'Xóa cửa hàng thành công');
           event.confirm.resolve();
@@ -46,11 +46,11 @@ export class ListStoreComponent implements OnInit {
           event.confirm.reject();
         },
       )
-    }
+    
   }
 
   onSaveConfirm(event) {
-   
+
     this.store_service.updateStore(event.data.store_id, event.newData).subscribe(
       (res) => {
         this.showToast('success', 'Thành công', 'Sửa thành công');
@@ -60,6 +60,10 @@ export class ListStoreComponent implements OnInit {
         this.showToast('success', 'Thất bại', 'Sửa thất bại');
       },
     )
+  }
+
+  editStore(id): void {
+    this.router.navigate(['/pages/store/update-store/', id]);
   }
 
   private showToast(status: NbComponentStatus, title: string, message: string) {
@@ -90,6 +94,16 @@ export class ListStoreComponent implements OnInit {
         title: 'ID',
         hide: true
       },
+      index: {
+        title: 'STT',
+        type: 'number',
+        filter: false,
+        editable: false,
+        addable: false,
+        valuePrepareFunction: (value, row, cell) => {
+          return cell.row.index + 1;
+        },
+      },
       store_name: {
         title: 'Tên cửa hàng',
       },
@@ -102,6 +116,13 @@ export class ListStoreComponent implements OnInit {
       email: {
         title: 'Email',
       },
+      customColumn: {
+        title: '',
+        type: 'custom',
+        renderComponent: ButtonComponent,
+        filter: false,
+        sort: false,
+      },
     },
     actions: {
       // Define actions column
@@ -109,8 +130,14 @@ export class ListStoreComponent implements OnInit {
       type: 'html',
       filter: false,
       sort: false,
+      position: 'right',
+      add: false,
+      edit: false,
+      delete: false,
+      selector: false,
     },
-  };
+  }
+
 
   data = [];
 }

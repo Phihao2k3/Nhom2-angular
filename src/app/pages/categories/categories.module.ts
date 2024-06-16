@@ -7,7 +7,10 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { categoriesRoutingModule, routedComponents } from './categories-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoriesAddComponent } from './add-categories/categories-add.compoment';
-
+import { ButtonComponent } from './button/button.component';
+import { EditComponent } from './button/EditComponent';
+import { DeleteComponent } from './button/deletecomponent';
+import { CategoriesUpdateComponent } from './update-categories/categories-update.compoment';
 @NgModule({
   imports: [
     NbCardModule,
@@ -26,13 +29,19 @@ import { CategoriesAddComponent } from './add-categories/categories-add.compomen
     NbUserModule,
     FormsModule,
     ReactiveFormsModule,
+
     
     
 
   ],
   declarations: [
     ...routedComponents,
-    CategoriesAddComponent
+    CategoriesAddComponent,
+    ButtonComponent,
+    EditComponent,
+    DeleteComponent,
+    CategoriesUpdateComponent
+
   ],
 })
 export class categoriesModule { }
