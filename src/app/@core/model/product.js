@@ -5,7 +5,7 @@ class product {
   }
   static async getallproduct() {
     return new Promise((resolve, reject) => {
-      db.query("SELECT * FROM products", function (error, results, fields) {
+      db.query("SELECT * FROM products ORDER BY product_id DESC", function (error, results, fields) {
         if (error) throw error;
         resolve(results);
       });

@@ -52,6 +52,7 @@ export class UserService extends ApiService {
       API_BASE_URL + API_ENDPOINT.users.delete + id
     );
   }
+  
   getUserById(id: number): Observable<any> {
     return this._http.get<any>(
       API_BASE_URL + API_ENDPOINT.users.detail + id

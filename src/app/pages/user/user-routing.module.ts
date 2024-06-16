@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { UserComponent } from './user.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { ListUserComponent } from './list-user/list-user.component';
+import { UpdateUserComponent } from './update-user/update-user.component';
 
 const routes: Routes = [{
   path: '',
@@ -18,6 +19,11 @@ const routes: Routes = [{
       path: 'listuser',
       data: { breadcrumb: 'Hiển thị danh sách' },
       component: ListUserComponent,
+    },
+    {
+      path: 'update-user/:id',
+      data: { breadcrumb: 'Cập nhật danh sách' },
+      component: UpdateUserComponent,
     },
   ],
 }];

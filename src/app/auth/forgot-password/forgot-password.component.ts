@@ -9,12 +9,12 @@ import { IAlertMessage } from '../../@theme/components/alert/ngx-alerts.componen
 import { finalize } from 'rxjs';
 
 @Component({
-  selector: 'ngx-login',
-  styleUrls: ['./login.component.scss'],
-  templateUrl: './login.component.html',
+  selector: 'ngx-forgot-password',
+  styleUrls: ['./forgot-password.component.scss'],
+  templateUrl:'./forgot-password.component.html',
 })
-export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+export class ForgotPasswordComponent implements OnInit {
+  forgot_password: FormGroup;
   alertMessages: IAlertMessage[] = [];
 
   constructor(
@@ -25,20 +25,16 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loginForm = new FormGroup({
+    this.forgot_password = new FormGroup({
       email: new FormControl('', Validators.required),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(8),
-      ]),
     });
   }
 
   onSubmit() {
-    if (this.loginForm.valid) {
+    if (this.forgot_password.valid) {
       this.router.navigate([ROUTER_CONFIG.pages]).then();
       this.auth
-        .login(this.loginForm.value)
+        .forgotPassword(this.forgot_password.value)
         .pipe(
           finalize(() => {
             this.spinner.hide();
@@ -53,9 +49,6 @@ export class LoginComponent implements OnInit {
   }
 
   protected handleLoginSuccess(res) {
-    this.storageService.setItem(LOCALSTORAGE_KEY.user_id,res.users[0].user_id);
-
-    this.storageService.setItem(LOCALSTORAGE_KEY.token, res.token);
 
     this.router.navigate(['/pages/dashboard'],{}).then();
     this.spinner.hide();

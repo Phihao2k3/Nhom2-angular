@@ -5,7 +5,7 @@ class store_inventory {
   }
   static async getallstore_inventory() {
     return new Promise((resolve, reject) => {
-      db.query("SELECT * FROM store_inventory", function (error, results, fields) {
+      db.query("SELECT * FROM store_inventory ORDER BY inventory_id DESC", function (error, results, fields) {
         if (error) throw error;
         resolve(results);
       });

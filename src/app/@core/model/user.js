@@ -5,7 +5,7 @@ class users {
   }
   static async getallusers() {
     return new Promise((resolve, reject) => {
-      db.query("SELECT * FROM users", function (error, results, fields) {
+      db.query("SELECT * FROM users ORDER BY user_id DESC", function (error, results, fields) {
         if (error) throw error;
         resolve(results);
       });
@@ -14,7 +14,7 @@ class users {
   static async getusersbyid(id) {
     return new Promise((resolve, reject) => {
       db.query(
-        "SELECT * FROM users WHERE user_id  = ?",
+        "SELECT * FROM users WHERE user_id = ?",
         [id],
         function (error, results, fields) {
           if (error) throw error;
@@ -64,6 +64,19 @@ class users {
       db.query(
         "SELECT * FROM users WHERE email = ? AND password = ?",
         [data.email, data.password],
+        function (error, results, fields) {
+          if (error) throw error;
+          resolve(results);
+        }
+      );
+    });
+  }
+
+  static forgotPassword(email) {
+    return new Promise((resolve, reject) => {
+      db.query(
+        "SELECT * FROM users WHERE email = ?",
+        [email],
         function (error, results, fields) {
           if (error) throw error;
           resolve(results);

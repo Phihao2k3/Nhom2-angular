@@ -7,7 +7,7 @@ class stores {
   static async getallstores() {
     return new Promise((resolve, reject) => {
       db.query(
-        "SELECT * FROM stores",
+        "SELECT * FROM stores ORDER BY store_id DESC",
         function (error, results, fields) {
           if (error) throw error;
           resolve(results);

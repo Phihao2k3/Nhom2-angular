@@ -5,7 +5,7 @@ class employees {
   }
   static async getallemployees() {
     return new Promise((resolve, reject) => {
-      db.query("SELECT * FROM employees", function (error, results, fields) {
+      db.query("SELECT * FROM employees ORDER BY employees DESC", function (error, results, fields) {
         if (error) throw error;
         resolve(results);
       });

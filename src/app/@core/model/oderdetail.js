@@ -6,7 +6,7 @@ class order_details {
   static async getallorder_detail() {
     return new Promise((resolve, reject) => {
       db.query(
-        "SELECT * FROM order_details",
+        "SELECT * FROM order_details ORDER BY order_detail_id DESC",
         function (error, results, fields) {
           if (error) throw error;
           resolve(results);

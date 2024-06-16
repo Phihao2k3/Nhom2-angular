@@ -19,13 +19,11 @@ export class AddUserComponent implements OnInit {
       first_name: new FormControl('', Validators.required),
       last_name: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
-      role: new FormControl('', Validators.required),
+      created_at: new FormControl('', Validators.required),
     })
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
     if (this.formAddUser.valid) {

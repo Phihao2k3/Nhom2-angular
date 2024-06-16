@@ -1,9 +1,11 @@
+// const { ResolveStart } = require("@angular/router");
 const user_class = require("../../app/@core/model/user");
 const jwt = require("jsonwebtoken");
+
 exports.getall = async (req, res) => {
   let users = await user_class.getallusers();
   res.status(200).json({
-    users: users,
+    users: users
   });
 };
 exports.getbyid = async (req, res) => {
@@ -40,6 +42,7 @@ exports.deleteusers = async (req, res) => {
   }
   res.status(200).json({ message: "Xóa thành công" });
 };
+
 exports.login = async (req, res) => {
   let users = req.body;
   let login = await user_class.login(users);
@@ -51,4 +54,50 @@ exports.login = async (req, res) => {
     users: login,
     token: token,
   });
+};
+
+exports.forgotpassword = async (req, res) => {
+  let email = req.body.email;
+
+  let users = await user_class.forgotPassword(email);
+  console.log(users);
+  if (users) {
+    const { sign } = require('./jwt');
+    const host = req.header('host');
+    console.log(req); 
+    const resetLink = `http://localhost:4200/auth/forgot-password?token=${sign(email)}&email=${email}`
+
+    const { sendForgotPasswordMail } = require('./mail');
+
+    sendForgotPasswordMail(users, host, resetLink)
+      .then((result) => {
+        console.log("Gửi thành công!");
+      })
+      .catch((error) => {
+        console.log("Gửi thất bại!");
+      })
+  } else {
+    res.status(404).json({ message: "Email không tồn tại" });
+  }
+
+  res.status(200).json({
+    user: users,
+    message: "Gửi thành công!"
+  });
+
+};
+
+exports.showResetPassword = async (req, res) => {
+  let email = req.query.email;
+  let token = req.query.token;
+  let { verify } = require('./jwt');
+  if(!token || !verify(token)){
+    return res.render('http://localhost:4200/pages/dashboard');
+  }
+
+};
+
+exports.resetPassword = async (req, res) => {
+
+
 };
