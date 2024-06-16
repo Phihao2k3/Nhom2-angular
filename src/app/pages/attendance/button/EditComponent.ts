@@ -7,7 +7,8 @@ import { NbDialogRef } from '@nebular/theme';
     <nb-card>
       <nb-card-header>{{ title }}</nb-card-header>
       <nb-card-body>
-        Bạn có chắc chắn muốn cập nhật tài liệu này không?
+        Bạn có chắc chắn muốn cập nhật tài liệu này không? <br>
+        <span class="text-danger">Lưu ý: chỉ có quản lý và cấp trên mới có quyền chỉnh sửa!</span>
       </nb-card-body>
       <nb-card-footer>
         <button nbButton status="danger" (click)="confirm()">Cập nhật</button>
