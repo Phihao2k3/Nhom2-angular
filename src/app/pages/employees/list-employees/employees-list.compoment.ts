@@ -37,10 +37,10 @@ export class EmployeeslistComponent implements OnInit {
         hide: true,
       },
       first_name: {
-        title: 'Tên',
+        title: 'Họ',
       },
       last_name: {
-        title: 'Họ',
+        title: 'Tên',
       },
       email: {
         title: 'Email',

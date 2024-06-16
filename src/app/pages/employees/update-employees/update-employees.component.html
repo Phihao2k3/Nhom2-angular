@@ -3,7 +3,7 @@
     <h2 class="title text-center">Cập nhật thông tin nhân viên</h2>`
     <form [formGroup]="formEmployeesUpdate" (ngSubmit)="onSubmit()">
       <div class="form-group p-2">
-        <label for="first_nameId">Tên</label>
+        <label for="first_nameId">Họ</label>
         <input type="text" class="form-control" id="first_nameId" formControlName="first_name">
         <div *ngIf="formEmployeesUpdate.get('first_name').touched && formEmployeesUpdate.get('first_name').invalid" class="text-danger">
           <div *ngIf="formEmployeesUpdate.get('first_name').errors?.required">Vui lòng nhập Tên!!</div>
@@ -11,7 +11,7 @@
       </div>
 
       <div class="form-group p-2">
-        <label for="last_nameId">Họ</label>
+        <label for="last_nameId">Tên</label>
         <input type="text" class="form-control" id="last_nameId" formControlName="last_name">
         <div *ngIf="formEmployeesUpdate.get('last_name').touched && formEmployeesUpdate.get('last_name').invalid" class="text-danger">
           <div *ngIf="formEmployeesUpdate.get('last_name').errors?.required">Vui lòng nhập Họ!!</div>

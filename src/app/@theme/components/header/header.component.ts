@@ -41,7 +41,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
   
 
-
   constructor(
     private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
@@ -55,7 +54,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
-    this.user = { name: 'Alibaba', picture: 'assets/images/account.png' }
+    this.user = { name: 'Alibaba', picture: 'https://gcs.tripi.vn/public-tripi/tripi-feed/img/474114AbO/hinh-anh-jack-dep-trai-cute-dang-yeu-nhat-2021_013741456.jpg' }
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
       .pipe(

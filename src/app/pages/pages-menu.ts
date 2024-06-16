@@ -11,6 +11,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/dashboard',
   },
   {
+    title: 'Attendance',
+    icon: 'layout-outline',
+    children: [
+      
+      {
+        title: 'Hiển thị danh sách',
+        link: '/pages/attendance/attendance-list',
+      },
+    ],
+  },
+  {
     title: 'User',
     icon: 'person-outline',
     children: [
@@ -26,6 +37,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       
     ],
   },
+  
   {
     title: 'Product',
     icon: 'cube-outline',
@@ -94,7 +106,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'people-outline',
     children: [
       {
-        title: 'Thêm loại người ',
+        title: 'Thêm nhân viên',
         icon: 'person-add-outline',
         link: '/pages/employees/addEmployees',
       },
@@ -119,15 +131,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
-  {
-    title: 'Attendance',
-    icon: 'layout-outline',
-    children: [
-      
-      {
-        title: 'Hiển thị danh sách',
-        link: '/pages/attendance/attendance-list',
-      },
-    ],
-  },
+  
 ];
