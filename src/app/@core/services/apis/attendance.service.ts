@@ -42,5 +42,11 @@ export class AttendanceService {
       },
     });
   }
-  
+  checkatt(id: number): Observable<any> {
+    return this.http.get<any>(
+      // query params
+      API_BASE_URL + API_ENDPOINT.attendance.check + '?id=' + id,
+      {}
+    );
+  }
 }

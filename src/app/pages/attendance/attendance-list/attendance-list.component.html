@@ -1,28 +1,56 @@
 <nb-card>
-    <div class="col-12 d-flex input-group justify-content-center p-4">
-        <div class="col-8">
-            <input type="search" id="form1" class="form-control " (change)="searchUser($event)">
-        </div>
-        <button type="button" class="btn btn-primary col-2">
-            Tìm kiếm
-        </button>
+    <nb-card-header>
+        Danh sách nhân viên <br>
+        (Nhập tên nhân viên để chấm công)
+    </nb-card-header>
+  <div class="col-12 d-flex input-group justify-content-center p-4">
+    <div class="col-8">
+      <input type="search" id="form1" class="form-control" (keydown.enter)="searchUser($event)">
     </div>
-    <ul class="listuser col-12 p-4">
-        <li *ngFor="let items of Employeesdata" class="list_items">
-            <span>
-                {{ items.last_name }}
-            </span>
-            <button (click)="attendance(items.employee_id,items.last_name,items.store_id)" class="btn btn-primary">Chấm công</button>
-        </li>
-    </ul>
+    <button type="button" class="btn btn-primary col-2" (click)="searchUser($event)">
+      Tìm kiếm
+    </button>
+  </div>
+
+  <ul class="listuser col-12 p-4">
+    <li class="list_items">
+      <span class="col-2">
+        Họ và tên
+      </span><span class="col-2">
+        Email
+      </span><span class="col-2">
+        Chức vụ
+      </span><span class="col-2">
+        Số điện thoại
+      </span>
+      <span class="col-2">
+        Thao tác
+      </span>
+    </li>
+
+    <li *ngFor="let items of Employeesdata" class="list_items">
+      <span class="col-2">
+        {{ items.last_name }}
+      </span>
+      <span class="col-2">
+        {{ items.email }}
+      </span>
+      <span class="col-2">
+        {{ items.job_title }}
+      </span><span class="col-2">
+        {{ items.phone_number }}
+      </span>
+      <button (click)="attendance(items.employee_id,items.last_name,items.store_id)" class="btn btn-primary col-2">Chấm công</button>
+    </li>
+  </ul>
 
 </nb-card>
 <nb-card>
-    <nb-card-header>
-        Danh sách chấm công
-    </nb-card-header>
-    <nb-card-body>
-        <ng2-smart-table [settings]="settings" [source]="data">
-        </ng2-smart-table>
-    </nb-card-body>
+  <nb-card-header>
+    Danh sách chấm công
+  </nb-card-header>
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="data">
+    </ng2-smart-table>
+  </nb-card-body>
 </nb-card>

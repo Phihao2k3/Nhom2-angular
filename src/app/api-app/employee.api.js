@@ -43,6 +43,7 @@ exports.timkiem = async (req, res) => {
   const keyword = req.query.keyword
   let employees = await employeesclass.timkiemnhanvien(keyword);
   res.status(200).json({
-    employees: employees
+    employees: employees,
+    keyword: keyword
   })
 }

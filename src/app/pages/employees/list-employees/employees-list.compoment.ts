@@ -50,6 +50,7 @@ export class EmployeeslistComponent implements OnInit {
       },
       hire_date: {
         title: 'Ngày',
+        hide: true,
       },
       job_title: {
         title: 'Công việc',

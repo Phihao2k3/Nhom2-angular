@@ -14,6 +14,7 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
 });
+router.get("/checkatt",attendanceapi.checkatt)
 router.delete("/:id", attendanceapi.deleteattendance);
 router.put("/:id", attendanceapi.updateattendance);
 router.post("/", attendanceapi.addattendance);

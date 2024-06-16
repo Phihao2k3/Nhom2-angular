@@ -75,5 +75,6 @@ export const API_ENDPOINT: IAPIEndpoint = {
     update: '/attendance/',
     delete: '/attendance/',
     detail: '/attendance/',
+    check : '/attendance/checkatt',
   },
 };
