@@ -43,22 +43,21 @@ export class AddorderComponent {
 
     this.getuser();
     this.getallproduct();
+    this.formOrder.get('shipping_method').valueChanges.subscribe((value) => {
+      this.updateShippingCost(value);
+    });
   }
 
   onSubmit() {
-    console.log(this.formOrder.value);
-    
+    this.formOrder.patchValue({ total_amount: this.totalPrice });
+
     if (this.formOrder.valid) {
-      
-      this.formOrder.value.total_amount = this.formOrder.value.total_amount.replace(
-        /\D/g,
-        ''
-      );
-      
+      console.log('====================================');
+      console.log(this.formOrder.value);
+      console.log('====================================');
       this.order.createOrder(this.formOrder.value).subscribe(
         (res) => {
           // chỉ lấy ngày tháng năm
-
           this.showToast('success', 'Thành công', 'Thêm đơn hàng thành công');
           this.productoderlist.forEach((element) => {
             this.order
@@ -126,32 +125,49 @@ export class AddorderComponent {
   onSelectProduct(id) {
     this.product.getProductById(id).subscribe(
       (res) => {
-        let items = [
-          {
-            product_id: res.product[0].product_id,
-            product_name: res.product[0].title,
-            price: res.product[0].price,
-            quantity: 1,
-          },
-        ];
-        this.productoderlist.push(items[0]);
-        this.totalPrice += res.product[0].price;
+        let product = {
+          product_id: res.product[0].product_id,
+          product_name: res.product[0].title,
+          price: res.product[0].price,
+          quantity: 1,
+        };
+        this.productoderlist.push(product);
+        this.calculateTotalPrice();
+        this.formOrder.patchValue({ total_amount: this.totalPrice });
       },
       (err) => {
         console.error(err);
       }
     );
   }
-  onChangeQta(index: number, newqty: number) {
+
+  onChangeQta(index: number, newqty: number, event) {
+    if (newqty < 1) {
+      newqty = 1;
+      event.target.value = 1;
+    }
     this.productoderlist[index].quantity = Number(newqty);
-    this.totalPrice = 0;
-    this.productoderlist.forEach((element) => {
-      this.totalPrice += element.price * element.quantity;
-    });
-    this.totalPrice = this.totalPrice.toLocaleString('it-IT', {
-      style: 'currency',
-      currency: 'VND',
-    });
-    console.log(this.productoderlist);
+    this.calculateTotalPrice();
+    this.formOrder.patchValue({ total_amount: this.totalPrice });
+  }
+
+  calculateTotalPrice() {
+    this.totalPrice = this.productoderlist.reduce(
+      (acc, product) => acc + product.price * product.quantity,
+      0
+    );
+  }
+
+  removeProduct(index: number) {
+    this.productoderlist.splice(index, 1);
+    this.calculateTotalPrice();
+    this.formOrder.patchValue({ total_amount: this.totalPrice });
+  }
+  updateShippingCost(method: string) {
+    if (method === 'Giao hàng nhanh') {
+      this.formOrder.get('shipping_cost').setValue(35000);
+    } else if (method === 'Giao hàng tiêu chuẩn') {
+      this.formOrder.get('shipping_cost').setValue(25000);
+    }
   }
 }

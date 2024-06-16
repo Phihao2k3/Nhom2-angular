@@ -5,6 +5,7 @@ import {
   NbComponentStatus,
   NbGlobalPhysicalPosition,
 } from '@nebular/theme';
+import { ButtonComponent } from './button/button.component';
 import { Router } from '@angular/router';
 @Component({
   selector: 'ngx-tree-grid',
@@ -47,35 +48,21 @@ export class OrderlistComponent implements OnInit {
     this.getAllOrder();
   }
   onDeleteConfirm(event) {
-    if (window.confirm('Bạn có muốn tiếp tục xóa không ?')) {
-      this.OrderService.deleteOrder(event.data.order_id).subscribe(
+     this.OrderService.deleteOrder(event.order_id).subscribe(
         (res) => {
           this.showToast('success', 'Thành công', 'Xóa hóa đơn thành công');
-          event.confirm.resolve();
+          this.getAllOrder();
         },
         (err) => {
           this.showToast('success', 'Thất bại', 'Xóa hóa đơn thất bại');
-          event.confirm.reject();
+          
         }
       );
-    }
+    
   }
   onSaveConfirm(event) {
-    event.newData.total_amount = event.newData.total_amount.replace(/\D/g, '');
-    event.newData.shipping_cost = event.newData.shipping_cost.replace(
-      /\D/g,
-      ''
-    );
+ this.router.navigate(['/pages/order/oder-update/', event.order_id]);
 
-    this.OrderService.updateOrder(event.data.order_id, event.newData).subscribe(
-      (res) => {
-        this.showToast('success', 'Thành công', 'Sửa thành công');
-        this.getAllOrder();
-      },
-      (err) => {
-        this.showToast('success', 'Thất bại', 'Sửa thất bại');
-      }
-    );
   }
   private showToast(status: NbComponentStatus, title: string, message: string) {
     this.toastrService.show(message, title, {
@@ -189,12 +176,8 @@ export class OrderlistComponent implements OnInit {
       },
       detail: {
         title: 'Chi tiết',
-        type: 'html',
-        valuePrepareFunction: (cell, row) => {
-          
-          return `<a routerLink="/pages/order/oder-detail/${row.order_id}" href="/pages/order/oder-detail/${row.order_id}">Chi tiết</a>
-`;
-        },
+        type: 'custom',
+        renderComponent: ButtonComponent,
         editable: false,
         addable: false,
         filter: false,
@@ -203,11 +186,13 @@ export class OrderlistComponent implements OnInit {
     },
     actions: {
       add: false,
-      edit: true,
-      delete: true,
+      edit: false,
+      delete: false,
     },
   };
 
   data = [];
- 
+  nextPage(id) {
+    this.router.navigate(['/pages/order/oder-detail/', id.order_id]);
+  }
 }

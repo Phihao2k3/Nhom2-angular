@@ -13,12 +13,20 @@ import { StoreService } from 'app/@core/services/apis/store.service';
 @Component({
   selector: 'app-employeeadd',
   templateUrl: './employees-add.compoment.html',
-  styleUrls: ['./employees-add.compoment.scss']
+  styleUrls: ['./employees-add.compoment.scss'],
 })
 export class EmployeesAddComponent {
   formEmployees: FormGroup;
-  
-   storelist: { store_id: number, store_name: string }[] = [];
+  jobList = [
+    { id: 1, title: 'Nhân viên bán hàng' },
+    { id: 2, title: 'Quản lý' },
+    { id: 3, title: 'Kế toán' },
+    { id: 4, title: 'Nhân viên kho' },
+    { id: 5, title: 'Nhân viên vệ sinh' },
+    { id: 6, title: 'Nhân viên bảo vệ' },
+    // Thêm các công việc khác vào đây
+  ];
+  storelist: { store_id: number; store_name: string }[] = [];
 
   constructor(
     private Emp: EmployeesService,
@@ -54,7 +62,11 @@ export class EmployeesAddComponent {
         }
       );
     } else {
-      this.showToast('danger', 'Lỗi', 'Vui lòng điền đầy đủ thông tin cần thiết');
+      this.showToast(
+        'danger',
+        'Lỗi',
+        'Vui lòng điền đầy đủ thông tin cần thiết'
+      );
     }
   }
 
@@ -71,17 +83,17 @@ export class EmployeesAddComponent {
   }
 
   getStore() {
-    this.store.getAllStore().subscribe(res => {
-      this.storelist = res.stores;
-     ;this.storelist.forEach((store) => {
-      console.log(store);
-      
-     })
-    },
+    this.store.getAllStore().subscribe(
+      (res) => {
+        this.storelist = res.stores;
+        this.storelist.forEach((store) => {
+          console.log(store);
+        });
+      },
       (err) => {
         console.log(err);
-      });
-
+      }
+    );
   }
   private showToast(status: NbComponentStatus, title: string, message: string) {
     this.toastrService.show(message, title, {
@@ -89,6 +101,4 @@ export class EmployeesAddComponent {
       position: NbGlobalPhysicalPosition.TOP_RIGHT,
     });
   }
-
-
 }

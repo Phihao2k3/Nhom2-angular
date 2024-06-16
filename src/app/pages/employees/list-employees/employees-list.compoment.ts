@@ -1,11 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
+import {
+  NbSortDirection,
+  NbSortRequest,
+  NbTreeGridDataSource,
+  NbTreeGridDataSourceBuilder,
+} from '@nebular/theme';
+import { StoreService } from 'app/@core/services/apis/store.service';
 import { EmployeesService } from 'app/@core/services/apis/employees.service';
 import {
   NbToastrService,
   NbComponentStatus,
   NbGlobalPhysicalPosition,
 } from '@nebular/theme';
+import { ButtonComponent } from '../button/button.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'ngx-tree-grid',
   templateUrl: './employees-list.compoment.html',
@@ -13,23 +21,17 @@ import {
 })
 export class EmployeeslistComponent implements OnInit {
   settings = {
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true,
-
-    },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
     columns: {
+      index: {
+        title: 'STT',
+        type: 'number',
+        filter: false,
+        editable: false,
+        addable: false,
+        valuePrepareFunction: (value, row, cell) => {
+          return cell.row.index + 1;
+        },
+      },
       employee_id: {
         title: 'ID',
         hide: true,
@@ -40,13 +42,13 @@ export class EmployeeslistComponent implements OnInit {
       last_name: {
         title: 'Họ',
       },
-      email	: {
+      email: {
         title: 'Email',
       },
       phone_number: {
         title: 'Số điện thoại',
-      }
-      , hire_date: {
+      },
+      hire_date: {
         title: 'Ngày',
       },
       job_title: {
@@ -57,84 +59,77 @@ export class EmployeeslistComponent implements OnInit {
       },
       store_id: {
         title: 'Store',
-    
+        hide: true,
       },
-      
-      
-
-
+      store_name: {
+        title: 'Cửa hàng',
+      },
+      customColumn: {
+        title: '',
+        type: 'custom',
+        renderComponent: ButtonComponent,
+        filter: false,
+        sort: false,
+      },
     },
     actions: {
-      // Define actions column
       title: 'Actions',
-      type: 'html',
-      filter: false,
-      sort: false,
+      type: 'custom',
+      position: 'right',
       add: false,
+      edit: false,
+      delete: false,
+      selector: false,
     },
   };
 
-  data = [
+  data = [];
 
-
-  ];
-
-  constructor(private EmployeesService: EmployeesService,
-    private toastrService: NbToastrService
-  ) { }
+  constructor(
+    private EmployeesService: EmployeesService,
+    private toastrService: NbToastrService,
+    private router: Router,
+    private store: StoreService
+  ) {}
 
   ngOnInit(): void {
-    this.getEmpoyees()
+    this.getEmpoyees();
   }
 
   getEmpoyees() {
     this.EmployeesService.getallEmployees().subscribe(
       (res) => {
         res.employees.forEach((e) => {
-          e.hire_date = e.hire_date.split('T')[0]
-        })
-        this.data = res.employees
-
-
-        console.log(this.data);
+          e.hire_date = e.hire_date.split('T')[0];
+          e.salary = e.salary.toLocaleString('it-IT', {
+            style: 'currency',
+            currency: 'VND',
+          });
+        });
+        this.data = res.employees;
       },
       (err) => {
         console.log(err);
       }
-    )
+    );
   }
   onSaveConfirm(event) {
-    this.EmployeesService.updateEmployees(event.data.employee_id, event.newData).subscribe(
-      (res) => {
-        this.showToast('success', 'Thành công', 'Sửa thành công');
-        this.getEmpoyees();
-      },
-      (err) => {
-        this.showToast('danger', 'Thất bại', 'Sửa thất bại');
-
-      },
-    )
+    this.router.navigate([
+      '/pages/employees/employees-update/',
+      event.employee_id,
+    ]);
   }
 
   onDeleteConfirm(event) {
-    if (window.confirm('Bạn có chắc chắn muốn xóa không?')) {
-      let id = event.data.employee_id;
-      this.EmployeesService.deleteEmployees(id).subscribe((res) => {
-          this.showToast('success', 'Thành công', 'Xóa loại thành công');
-          this.getEmpoyees();
-        },
-        (err) => {
-          this.showToast('danger', 'Thất bại', 'Xóa loại thất bại');
-        },
-          
-        );
+    this.EmployeesService.deleteEmployees(event.employee_id).subscribe(
+      (res) => {
+        this.getEmpoyees();
+      },
+      (err) => {
+        this.showToast('danger', 'Thất bại', 'Xóa loại thất bại');
       }
-    }
-
-
-
-
-
+    );
+  }
 
   private showToast(status: NbComponentStatus, title: string, message: string) {
     this.toastrService.show(message, title, {
@@ -143,4 +138,3 @@ export class EmployeeslistComponent implements OnInit {
     });
   }
 }
-
