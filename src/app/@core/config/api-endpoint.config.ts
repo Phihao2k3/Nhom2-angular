@@ -23,6 +23,7 @@ export const API_ENDPOINT: IAPIEndpoint = {
     update: '/orders/',
     delete: '/orders/',
     detail: '/order_details/',
+    byid: '/orders/',
     doanhthu: '/orders/doanhthusanpham/',
   },
   users: {

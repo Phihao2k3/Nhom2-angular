@@ -22,7 +22,9 @@ import {
   routedComponents,
 } from './product-routing.module';
 import { UpdateProductComponent } from './update-product/update-product.component';
-
+import { ButtonComponent } from './button/button.component';
+import { EditComponent } from './button/EditComponent';
+import { DeleteComponent } from './button/deletecomponent';
 @NgModule({
   imports: [
     CommonModule,
@@ -45,7 +47,12 @@ import { UpdateProductComponent } from './update-product/update-product.componen
     ReactiveFormsModule, // Add ReactiveFormsModule here
     NbToastrModule.forRoot(),
   ],
-  declarations: [...routedComponents, UpdateProductComponent],
-
+  declarations: [
+    ...routedComponents,
+    UpdateProductComponent,
+    ButtonComponent,
+    EditComponent,
+    DeleteComponent,
+  ],
 })
 export class ProductModule {}

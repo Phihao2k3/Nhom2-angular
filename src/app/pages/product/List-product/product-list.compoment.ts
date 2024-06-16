@@ -8,26 +8,21 @@ import {
   NbGlobalPhysicalPosition,
 } from '@nebular/theme';
 import { Router } from '@angular/router';
-
+import { ButtonComponent } from '../button/button.component';
 @Component({
   selector: 'basic-example-data',
   template: `
-    <ng2-smart-table
-      [settings]="settings"
-      [source]="data"
-      (deleteConfirm)="onDeleteConfirm($event)"
-      (editConfirm)="onSaveConfirm($event)"
-    ></ng2-smart-table>
+    <ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
   `,
 })
 export class productlistComponent implements OnInit {
   product: IProduct;
   settings = {
     edit: {
-      editButtonContent: '<i class="nb-edit"></i>', 
+      editButtonContent: '<i class="nb-edit"></i>',
       confirmSave: true,
-      saveButtonContent: '<i class="nb-checkmark"></i>', 
-      cancelButtonContent: '<i class="nb-close"></i>', 
+      saveButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
@@ -52,15 +47,15 @@ export class productlistComponent implements OnInit {
         editable: false,
       },
       title: {
-        title: 'Tên sản phẩm', 
+        title: 'Tên sản phẩm',
         editable: false,
       },
       price: {
-        title: 'Giá tiền', 
+        title: 'Giá tiền',
         editable: false,
       },
       publisher: {
-        title: 'NXB', 
+        title: 'NXB',
         editable: false,
       },
       image: {
@@ -72,21 +67,28 @@ export class productlistComponent implements OnInit {
       release_date: {
         title: 'Ngày ra mắt',
         editable: false,
-      
       },
       stock: {
-        title: 'Số lượng', 
+        title: 'Số lượng',
         editable: false,
+      },
+      customColumn: {
+        title: '',
+        type: 'custom',
+        renderComponent: ButtonComponent,
+        filter: false,
+        sort: false,
       },
     },
     actions: {
       // Define actions column
       title: 'Actions',
       type: 'html',
-      filter: false,
-      sort: false,
-      add: false,
       position: 'right',
+      add: false,
+      edit: false,
+      delete: false,
+      selector: false,
     },
   };
 
@@ -128,26 +130,19 @@ export class productlistComponent implements OnInit {
   }
 
   onDeleteConfirm(event): void {
-    if (window.confirm('Are you sure you want to delete?')) {
-      this.productService.deleteProduct(event.data.product_id).subscribe(
-        (res) => {
-          this.showToast('success', 'Thành công', 'Xóa sản phẩm thành công');
-          event.confirm.resolve();
-        },
-        (err) => {
-          this.showToast('danger', 'Thất bại', 'Xóa sản phẩm thất bại');
-          event.confirm.reject();
-        }
-      );
-    } else {
-      event.confirm.reject();
-    }
-  
+    this.productService.deleteProduct(event.product_id).subscribe(
+      (res) => {
+       
+        this.getallProducts();
+      },
+      (err) => {
+        this.showToast('danger', 'Thất bại', 'Xóa sản phẩm thất bại');
+        
+      }
+    );
   }
-  onSaveConfirm(event): void {
-    this.Router.navigate([
-      '/pages/product/editproduct/' + event.newData.product_id,
-    ]);
+  editProduct(id): void {
+    this.Router.navigate(['/pages/product/editproduct/', id]);
   }
   private showToast(status: NbComponentStatus, title: string, message: string) {
     this.toastrService.show(message, title, {

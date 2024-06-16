@@ -11,7 +11,7 @@
           </option>
         </select>
         <div *ngIf="formOrder.get('user_id').errors && formOrder.get('user_id').touched" class="text-danger">
-           Mã người dùng là bắt buộc.
+          Mã người dùng là bắt buộc.
         </div>
       </div>
       <div class="form-group">
@@ -33,32 +33,38 @@
             Danh Sách Sản Phẩm Đã Chọn
           </nb-card-header>
           <div *ngFor="let product of productoderlist; let i = index">
-            <div class="row">
-              <div class="col-4">
-                <p>
-                  {{ product.product_name }}
-                </p>
+            <div class="row m-2">
+              <div class="col-4 d-flex justify-content-center align-items-center">
+                {{ product.product_name }}
               </div>
               <!-- qta -->
-              <div class="col-4">
-                <input type="number" (change)="onChangeQta(i, $event.target.value)" [ngModel]="product.quantity" class="form-control" id="qta" value="{{ product.quantity }}">
+              <div class="col-2 d-flex justify-content-center align-items-center">
+                <input type="number" (change)="onChangeQta(i, $event.target.value,$event)" class="form-control m-0" id="qta" value="{{ product.quantity }}">
               </div>
-              <div class="col-4">
-                <p class="text-center">
+              
+              <div class="col-4 d-flex justify-content-center align-items-center">
+                <p class="text-center  m-0">
                   {{ product.price.toLocaleString() }} VNĐ
                 </p>
               </div>
+            <!-- remove -->
+            <div class="col-2 d-flex justify-content-end align-items-center">
+              <div class="col-12 ">
+                <button (click)="removeProduct(i)" class="btn btn-danger">Xóa</button>
+              </div>
+            </div>
             </div>
           </div>
           <!-- tổng tiền -->
+          <hr>
           <div class="row">
-            <div class="col-6">
+            <div class="col-8">
               <p>
                 Tổng Tiền:
               </p>
             </div>
-            <div class="col-6">
-              <input type="text" [ngModel]="totalPrice" class="form-control" id="totalPrice" formControlName="total_amount" readonly>
+            <div class="col-4">
+              <p class="text-center">{{ totalPrice | currency:'VND' }}</p>
             </div>
           </div>
         </div>
@@ -105,7 +111,7 @@
       </div>
       <div class="form-group">
         <label for="shippingCost">Chi Phí Giao Hàng:</label>
-        <input type="number" class="form-control" id="shippingCost" formControlName="shipping_cost">
+        <input type="number" class="form-control" id="shippingCost" formControlName="shipping_cost" disabled>
         <div *ngIf="formOrder.get('shipping_cost').errors && formOrder.get('shipping_cost').touched" class="text-danger">
           Chi phí giao hàng là bắt buộc.
         </div>

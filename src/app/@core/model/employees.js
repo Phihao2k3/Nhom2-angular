@@ -5,7 +5,7 @@ class employees {
   }
   static async getallemployees() {
     return new Promise((resolve, reject) => {
-      db.query("SELECT * FROM employees", function (error, results, fields) {
+      db.query("SELECT emp.*, str.store_name FROM employees emp INNER JOIN stores str ON emp.store_id = str.store_id ", function (error, results, fields) {
         if (error) throw error;
         resolve(results);
       });

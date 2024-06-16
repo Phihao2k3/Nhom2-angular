@@ -44,6 +44,14 @@ export class OrderService {
       orderDetail
     );
   }
+  getoderbyid(id: number): Observable<any> {
+    return this.http.get(API_BASE_URL + API_ENDPOINT.order.byid + id, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+    });
+  }
   getallOrderDetail(): Observable<any> {
     return this.http.get(API_BASE_URL + API_ENDPOINT.order.detail, {
       headers: {

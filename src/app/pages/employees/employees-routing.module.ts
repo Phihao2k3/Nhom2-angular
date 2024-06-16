@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { EmployeesComponent } from './employees.component';
 import { EmployeesAddComponent } from './add-employees/employees-add.compoment';
 import { EmployeeslistComponent } from './list-employees/employees-list.compoment';
-
+import { UpdateEmployeesComponent } from './update-employees/update-employees.component';
 const routes: Routes = [{
   path: '',
   component: EmployeesComponent,
@@ -16,6 +16,10 @@ const routes: Routes = [{
     {
       path: 'listEmployees',
       component: EmployeeslistComponent,
+    },
+    {
+      path: 'employees-update/:id',
+      component: UpdateEmployeesComponent,
     },
   ],
 }];

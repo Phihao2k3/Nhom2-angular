@@ -1,0 +1,80 @@
+<div class="container">
+  <nb-card class="p-4">
+    <h2 class="title text-center">Cập nhật thông tin nhân viên</h2>`
+    <form [formGroup]="formEmployeesUpdate" (ngSubmit)="onSubmit()">
+      <div class="form-group p-2">
+        <label for="first_nameId">Tên</label>
+        <input type="text" class="form-control" id="first_nameId" formControlName="first_name">
+        <div *ngIf="formEmployeesUpdate.get('first_name').touched && formEmployeesUpdate.get('first_name').invalid" class="text-danger">
+          <div *ngIf="formEmployeesUpdate.get('first_name').errors?.required">Vui lòng nhập Tên!!</div>
+        </div>
+      </div>
+
+      <div class="form-group p-2">
+        <label for="last_nameId">Họ</label>
+        <input type="text" class="form-control" id="last_nameId" formControlName="last_name">
+        <div *ngIf="formEmployeesUpdate.get('last_name').touched && formEmployeesUpdate.get('last_name').invalid" class="text-danger">
+          <div *ngIf="formEmployeesUpdate.get('last_name').errors?.required">Vui lòng nhập Họ!!</div>
+        </div>
+      </div>
+
+      <div class="form-group p-2">
+        <label for="emailId">Email</label>
+        <input type="email" class="form-control" id="emailId" formControlName="email">
+        <div *ngIf="formEmployeesUpdate.get('email').touched && formEmployeesUpdate.get('email').invalid" class="text-danger">
+          <div *ngIf="formEmployeesUpdate.get('email').errors?.required">Vui lòng nhập Email!!</div>
+          <div *ngIf="formEmployeesUpdate.get('email').errors?.email">Email không đúng định dạng.</div>
+        </div>
+      </div>
+
+      <div class="form-group p-2">
+        <label for="phone_numberId">Số điện thoại</label>
+        <input type="text" class="form-control" id="phone_numberId" formControlName="phone_number">
+        <div *ngIf="formEmployeesUpdate.get('phone_number').touched && formEmployeesUpdate.get('phone_number').invalid" class="text-danger">
+          <div *ngIf="formEmployeesUpdate.get('phone_number').errors?.required">Vui lòng nhập số điện thoại!!</div>
+          <div *ngIf="formEmployeesUpdate.get('phone_number').errors?.pattern">Số điện thoại phải có 10 chữ số.</div>
+        </div>
+      </div>
+
+      <div class="form-group p-2">
+        <label for="hire_dateId">Ngày</label>
+        <input type="date" class="form-control" id="hire_dateId" formControlName="hire_date">
+        <div *ngIf="formEmployeesUpdate.get('hire_date').touched && formEmployeesUpdate.get('hire_date').invalid" class="text-danger">
+          <div *ngIf="formEmployeesUpdate.get('hire_date').errors?.required">Vui lòng nhập ngày!!</div>
+        </div>
+      </div>
+
+      <div class="form-group p-2">
+        <label for="job_titleId">Công việc</label>
+        <input type="text" class="form-control" id="job_titleId" formControlName="job_title">
+        <div *ngIf="formEmployeesUpdate.get('job_title').touched && formEmployeesUpdate.get('job_title').invalid" class="text-danger">
+          <div *ngIf="formEmployeesUpdate.get('job_title').errors?.required">Vui lòng nhập công việc!!</div>
+        </div>
+      </div>
+
+      <div class="form-group p-2">
+        <label for="salaryId">Lương </label>
+        <input type="number" class="form-control" id="salaryId" formControlName="salary">
+        <div *ngIf="formEmployeesUpdate.get('salary').touched && formEmployeesUpdate.get('salary').invalid" class="text-danger">
+          <div *ngIf="formEmployeesUpdate.get('salary').errors?.required">Vui lòng nhập lương!!</div>
+          <div *ngIf="formEmployeesUpdate.get('salary').errors?.min">Lương phải là số dương!!</div>
+        </div>
+      </div>
+
+      <div class="form-group p-2">
+        <label for="store_Id">Cửa hàng</label>
+        <select class="form-control" id="store_Id" formControlName="store_id">
+          <option value="" disabled selected>Chọn mã chi nhánh</option>
+          <option *ngFor="let a of storelist" [value]="a.store_id">
+            {{ a.store_name }}
+          </option>
+        </select>
+        <div *ngIf="formEmployeesUpdate.get('store_id').touched && formEmployeesUpdate.get('store_id').invalid" class="text-danger">
+          <div *ngIf="formEmployeesUpdate.get('store_id').errors?.required">Vui lòng nhập store!!</div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="formEmployeesUpdate.invalid">Cập nhật</button>
+    </form>
+  </nb-card>
+</div>

@@ -4,7 +4,7 @@
       <nb-card class="p-4" status="success">
         <nb-card-header class="text-center">Tổng số sản phẩm</nb-card-header>
         <nb-card-body class="text-center">
-          <p>{{ Totalproduct }}</p>
+          <p>{{ Totalproduct | number }}</p>
         </nb-card-body>
       </nb-card>
     </div>
@@ -12,7 +12,7 @@
       <nb-card class="p-4" status="danger">
         <nb-card-header class="text-center">Tổng số đơn hàng</nb-card-header>
         <nb-card-body class="text-center">
-          <p>{{ Totalorder }}</p>
+          <p>{{ Totalorder | number }}</p>
         </nb-card-body>
       </nb-card>
     </div>
@@ -20,7 +20,7 @@
       <nb-card class="p-4" status="warning">
         <nb-card-header class="text-center">Doanh thu</nb-card-header>
         <nb-card-body class="text-center">
-          <p>{{ totalmoney }}</p>
+          <p>{{ totalmoney | currency:'VND' }}</p>
         </nb-card-body>
       </nb-card>
     </div>
