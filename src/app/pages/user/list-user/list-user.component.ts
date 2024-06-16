@@ -6,6 +6,7 @@ import { IUsers } from 'app/@core/interfaces/users.interface';
 import { NbToastrService, NbComponentStatus, NbGlobalPhysicalPosition } from '@nebular/theme';
 import { API_BASE_URL } from 'app/@core/config/api-endpoint.config';
 import { API_ENDPOINT } from 'app/@core/config/api-endpoint.config';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'ngx-tree-grid',
@@ -26,7 +27,8 @@ export class ListUserComponent implements OnInit {
 
   constructor(
     private user_service: UserService,
-    private toastrService: NbToastrService
+    private toastrService: NbToastrService,
+    private router: Router
   ) {
 
   }
@@ -37,35 +39,32 @@ export class ListUserComponent implements OnInit {
       this.data = this.users;
       // this.currentPage = res.meta.current_page;
       // console.log(res.meta.current_page);
-      
+
       // this.lastPage = res.meta.last_page;
     }, err => {
       console.log(err);
     })
   }
 
-  getPage(res: any){
+  getPage(res: any) {
     this.data = res.users;
     console.log(res);
   }
 
   onDeleteConfirm(event) {
-    if (window.confirm("Bạn có muốn tiếp tục xóa không ?")) {
-      this.user_service.deleteUser(event.data.user_id).subscribe(
-        (res) => {
-          this.showToast('success', 'Thành công', 'Xóa tài khoản thành công');
-          event.confirm.resolve();
-        },
-        (err) => {
-          this.showToast('success', 'Thất bại', 'Xóa tài khoản thất bại');
-          event.confirm.reject();
-        },
-      )
-    }
+    this.user_service.deleteUser(event.user_id).subscribe(
+      (res) => {
+        this.getUser();
+      },
+      (err) => {
+        this.showToast('success', 'Thất bại', 'Xóa tài khoản thất bại');
+        event.confirm.reject();
+      },
+    )
   }
 
   onSaveConfirm(event) {
-   
+
     this.user_service.updateUser(event.data.user_id, event.newData).subscribe(
       (res) => {
         this.showToast('success', 'Thành công', 'Sửa thành công');
@@ -75,6 +74,10 @@ export class ListUserComponent implements OnInit {
         this.showToast('success', 'Thất bại', 'Sửa thất bại');
       },
     )
+  }
+
+  updateUser(id): void {
+    this.router.navigate(['/pages/user/update-user/', id]);
   }
 
   private showToast(status: NbComponentStatus, title: string, message: string) {
@@ -101,6 +104,16 @@ export class ListUserComponent implements OnInit {
       confirmDelete: true,
     },
     columns: {
+      index: {
+        title: 'STT',
+        type: 'number',
+        filter: false,
+        editable: false,
+        addable: false,
+        valuePrepareFunction: (value, row, cell) => {
+          return cell.row.index + 1;
+        },
+      },
       user_id: {
         title: 'ID',
         hide: true
@@ -117,15 +130,13 @@ export class ListUserComponent implements OnInit {
       email: {
         title: 'Email',
       },
-      role: {
-        title: 'Vai trò',
-        editor: {
-          type: 'list',
-          config: {
-            list: [{ value: '1', title: 'Nhân viên' }, { value: '2', title: 'Quản lý' }]
-          }
-        }
-      },
+      customColumn: {
+        title: '',
+        type: 'custom',
+        renderComponent: ButtonComponent,
+        filter: false,
+        sort: false,
+      }
     },
     actions: {
       // Define actions column
@@ -133,6 +144,11 @@ export class ListUserComponent implements OnInit {
       type: 'html',
       filter: false,
       sort: false,
+      position: 'right',
+      add: false,
+      edit: false,
+      delete: false,
+      selector: false,
     },
   };
 

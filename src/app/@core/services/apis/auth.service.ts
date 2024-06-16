@@ -57,7 +57,7 @@ export class AuthService extends ApiService {
 
   forgotPassword(form: ILogin): Observable<any> {
     return this.post(API_BASE_URL + API_ENDPOINT.auth.forgotPassword, {
-      idLogin: form.idLogin,
+      email: form.email.trim(),
     });
   }
 

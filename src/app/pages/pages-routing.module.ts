@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { ProfileComponent } from './profile/profile.component';
 import { PagesComponent } from './pages.component';
-import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserComponent } from './user/user.component';
+import { UpdateUserComponent } from './user/update-user/update-user.component';
 
 const routes: Routes = [
   {

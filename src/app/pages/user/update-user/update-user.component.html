@@ -1,0 +1,38 @@
+<nb-card class="p-4">
+  <div class="container">
+    <h2 class="title">Cập nhật người dùng</h2> 
+    <form [formGroup]="formUpdateUser" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Tên đăng nhập</label>
+        <input type="text" class="form-control" placeholder="Tên đăng nhập" formControlName="username">
+      </div>
+
+      <div class="form-group">
+        <label for="">Mật khẩu</label>
+        <input class="form-control " type="password" placeholder="Mật khẩu" formControlName="password">
+      </div>
+
+      <div class="form-group">
+        <label for="">Họ</label>
+        <input class="form-control " type="text" placeholder="Họ" formControlName="first_name">
+      </div>
+
+      <div class="form-group">
+        <label for="">Tên</label>
+        <input class="form-control " type="text" placeholder="Tên" formControlName="last_name">
+      </div>
+
+      <div class="form-group">
+        <label for="">Email</label>
+        <input class="form-control " type="text" placeholder="Email" formControlName="email">
+      </div>
+
+      <div class="form-group">
+        <label for="">Ngày cập nhật</label>
+        <input class="form-control " type="date" placeholder="Date" formControlName="updated_at">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Cập nhật</button>
+    </form>
+  </div>
+</nb-card>

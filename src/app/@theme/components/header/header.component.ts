@@ -99,7 +99,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (title === 'Profile') {
       this.router.navigate(['/pages/profile'], {}).then();
     }else if( title === 'Log out'){
-      this.storageService.removeItem(LOCALSTORAGE_KEY.token)
+      this.storageService.removeItem(LOCALSTORAGE_KEY.token);
+      this.router.navigate([''], {}).then();
     }
   }
 }

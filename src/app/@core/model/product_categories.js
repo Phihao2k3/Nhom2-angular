@@ -5,7 +5,7 @@ class productcate {
   }
   static async getallproductcate() {
     return new Promise((resolve, reject) => {
-      db.query("SELECT * FROM product_categories", function (error, results, fields) {
+      db.query("SELECT * FROM product_categories ORDER BY category_id DESC", function (error, results, fields) {
         if (error) throw error;
         resolve(results);
       });
