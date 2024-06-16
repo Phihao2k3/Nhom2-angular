@@ -1,6 +1,6 @@
 <nb-card>
   <nb-card-header>
-    <h2 class="title">Chỉnh Sửa Kho Hàng</h2>
+    <h2 class="title">Thêm Kho Hàng</h2>
   </nb-card-header>
   <nb-card-body>
     <div class="container">
@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
           <label for="productId">Mã Sản Phẩm:</label>
-          <select class="form-control" id="productId" formControlName="product_id">
+          <select class="form-control" id="productId" formControlName="product_id" (change)="onSelectProduct($event.target.value)">
             <option value="" disabled selected>Chọn mã sản phẩm</option>
             <option *ngFor="let item of productlist" [value]="item.product_id">{{ item.title }}</option>
           </select>
@@ -27,13 +27,13 @@
         </div>
         <div class="form-group">
           <label for="quantity">Số Lượng:</label>
-          <input type="number" class="form-control" id="quantity" formControlName="quantity">
+          <input type="number" class="form-control" id="quantity" formControlName="quantity" >
           <div *ngIf="formInventory.get('quantity').errors && formInventory.get('quantity').touched" class="text-danger">
             <div *ngIf="formInventory.get('quantity').errors.required">Số lượng là bắt buộc.</div>
             <div *ngIf="formInventory.get('quantity').errors.min">Số lượng phải lớn hơn 0.</div>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">Cập Nhật Kho Hàng</button>
+        <button type="submit" class="btn btn-primary">Thêm Kho Hàng</button>
       </form>
     </div>
   </nb-card-body>

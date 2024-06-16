@@ -60,23 +60,44 @@ export class StoreInventoryListComponent implements OnInit {
 
   settings = {
     
-    columns: {
+    columns: {index: {
+      title: 'STT',
+      type: 'number',
+      filter: false,
+      editable: false,
+      addable: false,
+      valuePrepareFunction: (value, row, cell) => {
+        return cell.row.index + 1;
+      },
+    },
+      store_name:{
+        title: 'Tên cửa hàng',
+        editable: false,
+      },
       store_id: {
         title: 'Mã cửa hàng',
         // type: 'string',
         editable: false,
-
+        hide:true
       },
       product_id	: {
         title: 'Mã sản phẩm',
         // type: 'string',
         editable: false,
+        hide: true
+      },
+      product_title :{
+        title: 'Tên sản phẩm',
+        // type: 'string',
+        editable: false,
+     
       },
       quantity: {
         title: 'Số lượng',
         type: 'number',
         // editable: false,
       },
+
       customColumn: {
         title: '',
         type: 'custom',
