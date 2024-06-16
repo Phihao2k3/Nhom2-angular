@@ -1,0 +1,104 @@
+<!-- <div class="row">
+
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-header>Sua người dùng</nb-card-header>
+      <nb-card-body>
+        <form [formGroup]="formUpdateStores" (ngSubmit)="onSubmit()">
+          <nb-card-body>
+
+            <nb-card class="mt-3">
+              <nb-card-header>Tên cửa hàng</nb-card-header>
+              <nb-card-body>
+                <input type="text" class="mt-3" nbInput fullWidth placeholder="Tên cửa hàng"
+                  formControlName="store_name">
+                <span class="text-danger" *ngIf="formUpdateStores.get('store_name')!.invalid &&
+                (formUpdateStores.get('store_name')!.dirty || formUpdateStores.get('store_name')!.touched)">Vui lòng nhập cửa hàng!
+                </span>
+              </nb-card-body>
+            </nb-card>
+
+            <nb-card class="mt-3">
+              <nb-card-header>Địa chỉ</nb-card-header>
+              <nb-card-body>
+                <input class="mt-3 " type="text" nbInput fullWidth placeholder="Địa chỉ"
+                  formControlName="address">
+                <span class="text-danger" *ngIf="formUpdateStores.get('address')!.invalid &&
+            (formUpdateStores.get('address')!.dirty || formUpdateStores.get('address')!.touched)">Vui lòng nhập địa chỉ!
+                </span>
+              </nb-card-body>
+            </nb-card>
+
+            <nb-card class="mt-3">
+              <nb-card-header>Số điện thoại</nb-card-header>
+              <nb-card-body>
+                <input class="mt-3 " type="text" nbInput fullWidth placeholder="Số điện thoại" formControlName="phone_number">
+                <span class="text-danger" *ngIf="formUpdateStores.get('phone_number')!.invalid &&
+            (formUpdateStores.get('phone_number')!.dirty || formUpdateStores.get('phone_number')!.touched)">Vui lòng nhập số điện thoại!
+                </span>
+              </nb-card-body>
+            </nb-card>
+
+            <nb-card class="mt-3">
+              <nb-card-header>Email</nb-card-header>
+              <nb-card-body>
+                <input class="mt-3 " type="text" nbInput fullWidth placeholder="Email" formControlName="email">
+                <span class="text-danger" *ngIf="formUpdateStores.get('email')!.invalid &&
+            (formUpdateStores.get('email')!.dirty || formUpdateStores.get('email')!.touched)">Vui lòng nhập email!
+                </span>
+              </nb-card-body>
+            </nb-card>
+
+            <button hero nbButton type="submit">Thêm</button>
+          </nb-card-body>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div> -->
+
+<nb-card class="p-4">
+  <div class="container">
+    <h2 class="title">Sửa cửa hàng</h2>
+    <form [formGroup]="formUpdateStores" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="store_nameId">Tên cửa hàng</label>
+        <input type="text" class="form-control" id="store_nameId" formControlName="store_name">
+        <div *ngIf="formUpdateStores.get('store_name').touched && formUpdateStores.get('store_name').invalid"
+          class="text-danger">
+          <div *ngIf="formUpdateStores.get('store_name').errors?.required">Vui lòng nhập Tên!!</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="addressId">Địa chỉ</label>
+        <input type="text" class="form-control" id="addressId" formControlName="address">
+        <div *ngIf="formUpdateStores.get('address').touched && formUpdateStores.get('address').invalid"
+          class="text-danger">
+          <div *ngIf="formUpdateStores.get('address').errors?.required">Vui lòng nhập địa chỉ!!</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="emailId">Email</label>
+        <input type="email" class="form-control" id="emailId" formControlName="email">
+        <div *ngIf="formUpdateStores.get('email').touched && formUpdateStores.get('email').invalid" class="text-danger">
+          <div *ngIf="formUpdateStores.get('email').errors?.required">Vui lòng nhập Email!!</div>
+          <div *ngIf="formUpdateStores.get('email').errors?.email">Email không đúng định dạng.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone_numberId">Số điện thoại</label>
+        <input type="text" class="form-control" id="phone_numberId" formControlName="phone_number">
+        <div *ngIf="formUpdateStores.get('phone_number').touched && formUpdateStores.get('phone_number').invalid"
+          class="text-danger">
+          <div *ngIf="formUpdateStores.get('phone_number').errors?.required">Vui lòng nhập số điện thoại!!</div>
+          <div *ngIf="formUpdateStores.get('phone_number').errors?.pattern">Số điện thoại phải có 10 chữ số.</div>
+        </div>
+      </div>
+      
+      <button type="submit" class="btn btn-primary" [disabled]="formUpdateStores.invalid">Sửa</button>
+    </form>
+  </div>
+</nb-card>

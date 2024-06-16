@@ -1,0 +1,32 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  nb-card {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+}
+.form-group label {
+  margin-bottom: 0.5rem;
+}
+.form-group input, .form-group select, .form-group textarea {
+  margin-bottom: 0.5rem;
+}
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%;
+}
+.add-button {
+  margin-top: 1rem;
+}
+
+
+
+.form-control {
+  background-color: #fefcfc;
+  color: #333333;
+}

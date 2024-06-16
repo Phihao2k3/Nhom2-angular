@@ -1,6 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
 import { CategoriesService } from 'app/@core/services/apis/categories.service';
+import { ButtonComponent } from '../button/button.component';
+import { EditComponent } from '../button/EditComponent'; 
+import { DeleteComponent } from '../button/deletecomponent';
+import { Router } from '@angular/router';
 import {
   NbToastrService,
   NbComponentStatus,
@@ -34,20 +38,42 @@ export class CategorieslistComponent implements OnInit {
         title: 'ID',
         hide: true,
       },
+      index: {
+        title: 'STT',
+        type: 'number',
+        filter: false,
+        editable: false,
+        addable: false,
+        valuePrepareFunction: (value, row, cell) => {
+          return cell.row.index + 1;
+        },
+      },
       category_name: {
         title: 'loại',
-      }
+      },
+      customColumn: {
+        title: '',
+        type: 'custom',
+        renderComponent: ButtonComponent,
+        filter: false,
+        sort: false,
+      },
+
 
 
     },
-    actions: {
+    actions:
+    {
       // Define actions column
       title: 'Actions',
       type: 'html',
-      filter: false,
-      sort: false,
+      position: 'right',
       add: false,
-    },
+      edit: false,
+      delete: false,
+      selector: false,
+    }
+    
   };
 
   data = [
@@ -56,7 +82,9 @@ export class CategorieslistComponent implements OnInit {
   ];
 
   constructor(private CategoriesService: CategoriesService,
-    private toastrService: NbToastrService
+    private toastrService: NbToastrService,
+    private router: Router
+    
   ) { }
 
   ngOnInit(): void {
@@ -76,7 +104,7 @@ export class CategorieslistComponent implements OnInit {
       }
     )
   }
-  onSaveConfirm(event) {
+  oonSaveConfirm(event) {
     let id = event.data.category_id
     this.CategoriesService.updateCaterogies(id, event.newData).subscribe((res) => {
       this.showToast('success', 'Thành công', 'Sửa loại thành công');
@@ -90,22 +118,25 @@ export class CategorieslistComponent implements OnInit {
   }
 
   onDeleteConfirm(event) {
-    if (window.confirm('Bạn có chắc chắn muốn xóa không?')) {
-      let id = event.data.category_id;
-      this.CategoriesService.deleteCaterogies(id).subscribe(
-        (res) => {
-          this.showToast('success', 'Thành công', 'Xóa sản phẩm thành công');
-          this.getCategory();
-        },
-        (err) => {
-          this.showToast('danger', 'Thất bại', 'Xóa sản phẩm thất bại');
-        }
-      );
-    } else {
-      event.confirm.reject();
-    }
+     
+    this.CategoriesService.deleteCaterogies(event.category_id).subscribe(
+      (res) => {
+     
+        this.getCategory();
+      },
+      (err) => {
+        this.showToast('danger', 'Thất bại', 'Xóa hóa đơn thất bại');
+     
+      },
+    )
+     
   }
 
+  editCate(id): void {
+    this.router.navigate(['/pages/categories/updateCategory/', id]);
+    console.log(id);
+    
+  }
 
 
   private showToast(status: NbComponentStatus, title: string, message: string) {
@@ -114,5 +145,6 @@ export class CategorieslistComponent implements OnInit {
       position: NbGlobalPhysicalPosition.TOP_RIGHT,
     });
   }
+
 }
 

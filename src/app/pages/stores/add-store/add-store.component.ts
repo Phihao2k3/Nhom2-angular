@@ -16,9 +16,15 @@ export class AddStoreComponent implements OnInit {
     this.formAddStore = new FormGroup({
       store_name: new FormControl('', Validators.required),
       address: new FormControl('', Validators.required),
-      phone_number: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
-    })
+      phone_number: new FormControl('', [
+        Validators.required,
+        Validators.pattern((/^\d{10}$/))
+      ]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.email
+      ])
+    });
   }
 
   ngOnInit(): void { }

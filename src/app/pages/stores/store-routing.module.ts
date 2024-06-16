@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { StoreComponent } from './store.component';
 import { AddStoreComponent } from './add-store/add-store.component';
 import { ListStoreComponent } from './list_store/list-store.component';
+import { StoreUpdateComponent } from './update-store/stores-update.compoment';
 
 const routes: Routes = [{
   path: '',
@@ -19,6 +20,12 @@ const routes: Routes = [{
       data: { breadcrumb: 'Hiển thị danh sách' },
       component: ListStoreComponent,
     },
+    {
+      path: 'update-store/:id',
+      data: { breadcrumb: ' Cập nhật danh sách' },
+      component: StoreUpdateComponent,
+    },
+    
   ],
 }];
 

@@ -1,16 +1,15 @@
 <div class="row">
   <div class="col-lg-12">
     <nb-card>
-      <nb-card-header>Thêm loại sản phẩm</nb-card-header>
+      <nb-card-header>Sửa loại sản phẩm</nb-card-header>
       <nb-card-body>
         <form [formGroup]="formCaterories" (ngSubmit)="onSubmit()">
           <input type="text" class="mt-3" nbInput fullWidth placeholder="Tên loại" formControlName="category_name" id="cate">
-          <!-- Hiển thị thông báo lỗi nếu trường category_name có lỗi và đã được chạm -->
           <div *ngIf="formCaterories.get('category_name').errors && formCaterories.get('category_name').touched" class="text-danger">
             Vui lòng nhập loại!!
           </div>
           <button class="mt-3 btn btn-success" type="submit">
-            Thêm
+            Sửa
           </button>
         </form>
       </nb-card-body>

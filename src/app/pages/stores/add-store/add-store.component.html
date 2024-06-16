@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-12">
     <nb-card>
-      <nb-card-header>Thêm người dùng</nb-card-header>
+      <nb-card-header>Thêm Cửa hàng</nb-card-header>
       <nb-card-body>
         <form [formGroup]="formAddStore" (ngSubmit)="onSubmit()">
           <nb-card-body>
@@ -9,31 +9,28 @@
             <nb-card class="mt-3">
               <nb-card-header>Tên cửa hàng</nb-card-header>
               <nb-card-body>
-                <input type="text" class="mt-3" nbInput fullWidth placeholder="Tên cửa hàng"
-                  formControlName="store_name">
+                <input type="text" class="mt-3" nbInput fullWidth placeholder="Tên cửa hàng" formControlName="store_name">
                 <span class="text-danger" *ngIf="formAddStore.get('store_name')!.invalid &&
-                (formAddStore.get('store_name')!.dirty || formAddStore.get('store_name')!.touched)">Vui lòng nhập cửa hàng!
-                </span>
+                (formAddStore.get('store_name')!.dirty || formAddStore.get('store_name')!.touched)">Vui lòng nhập tên cửa hàng!</span>
               </nb-card-body>
             </nb-card>
 
             <nb-card class="mt-3">
               <nb-card-header>Địa chỉ</nb-card-header>
               <nb-card-body>
-                <input class="mt-3 " type="text" nbInput fullWidth placeholder="Địa chỉ"
-                  formControlName="address">
+                <input type="text" class="mt-3" nbInput fullWidth placeholder="Địa chỉ" formControlName="address">
                 <span class="text-danger" *ngIf="formAddStore.get('address')!.invalid &&
-            (formAddStore.get('address')!.dirty || formAddStore.get('address')!.touched)">Vui lòng nhập địa chỉ!
-                </span>
+                (formAddStore.get('address')!.dirty || formAddStore.get('address')!.touched)">Vui lòng nhập địa chỉ!</span>
               </nb-card-body>
             </nb-card>
 
             <nb-card class="mt-3">
               <nb-card-header>Số điện thoại</nb-card-header>
               <nb-card-body>
-                <input class="mt-3 " type="text" nbInput fullWidth placeholder="Số điện thoại" formControlName="phone_number">
+                <input type="text" class="mt-3" nbInput fullWidth placeholder="Số điện thoại" formControlName="phone_number">
                 <span class="text-danger" *ngIf="formAddStore.get('phone_number')!.invalid &&
-            (formAddStore.get('phone_number')!.dirty || formAddStore.get('phone_number')!.touched)">Vui lòng nhập số điện thoại!
+                (formAddStore.get('phone_number')!.dirty || formAddStore.get('phone_number')!.touched)">
+                  Vui lòng nhập số điện thoại hợp lệ!
                 </span>
               </nb-card-body>
             </nb-card>
@@ -41,9 +38,10 @@
             <nb-card class="mt-3">
               <nb-card-header>Email</nb-card-header>
               <nb-card-body>
-                <input class="mt-3 " type="text" nbInput fullWidth placeholder="Email" formControlName="email">
+                <input type="text" class="mt-3" nbInput fullWidth placeholder="Email" formControlName="email">
                 <span class="text-danger" *ngIf="formAddStore.get('email')!.invalid &&
-            (formAddStore.get('email')!.dirty || formAddStore.get('email')!.touched)">Vui lòng nhập email!
+                (formAddStore.get('email')!.dirty || formAddStore.get('email')!.touched)">
+                  Vui lòng nhập email hợp lệ!
                 </span>
               </nb-card-body>
             </nb-card>

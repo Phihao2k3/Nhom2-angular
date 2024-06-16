@@ -7,6 +7,11 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { StoreRoutingModule, routedComponents } from './store-routing.module';
 // import { FsIconComponent } from './list-user/list-user.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { EditComponent } from './button/EditComponent';
+import { ButtonComponent } from './button/button.component';
+import { DeleteComponent } from './button/deletecomponent';
+import { CategoriesUpdateComponent } from '../categories/update-categories/categories-update.compoment';
+import { StoreUpdateComponent } from './update-store/stores-update.compoment';
 
 @NgModule({
   imports: [
@@ -29,6 +34,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   ],
   declarations: [
     ...routedComponents,
+    ButtonComponent,
+    EditComponent,
+    DeleteComponent,
+    StoreUpdateComponent
+   
+
     // FsIconComponent,
   ],
 })
