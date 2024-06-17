@@ -143,9 +143,14 @@ export class AttendanceListComponent implements OnInit {
     return `${year}-${month}-${day}`;
   }
   searchUser(e) {
-    this.EmployeesService.timkiem(e.target.value).subscribe((data) => {
-      this.Employeesdata = data.employees;
-    });
+    if( e.target.value ==''){
+
+    }else{
+      this.EmployeesService.timkiem(e.target.value).subscribe((data) => {
+        this.Employeesdata = data.employees;
+      });
+    }
+  
   }
   attendance(id, name, storeid) {
     this.attendanceService.checkatt(id).subscribe((data) => {
@@ -156,8 +161,8 @@ export class AttendanceListComponent implements OnInit {
         console.log('chưa có');
         let time_start_work = new Date();
         let time_end_work = new Date();
-        time_start_work.setHours(7);
-        time_start_work.setMinutes(30);
+        time_start_work.setHours(10);
+        time_start_work.setMinutes(10);
         time_start_work.setSeconds(0);
         time_end_work.setHours(17);
         time_end_work.setMinutes(50);
@@ -233,8 +238,8 @@ export class AttendanceListComponent implements OnInit {
       return;
     } else {
       let time_end_work = new Date();
-      time_end_work.setHours(17);
-      time_end_work.setMinutes(50);
+      time_end_work.setHours(10);
+      time_end_work.setMinutes(10);
       time_end_work.setSeconds(0);
       let currentDate = new Date();
       let time_now = this.formatTime(currentDate);
@@ -252,7 +257,7 @@ export class AttendanceListComponent implements OnInit {
           status: data.status,
         };
 
-        this.showToast('warning', 'Thông báo', 'cảm ơn bạn đã làm việc');
+        this.showToast('warning', 'Thông báo', 'Cảm ơn bạn đã làm việc');
 
         if (this.checktimeover(time_end_work.getHours(), currentDate)) {
           att.message += 'kết ca muộn 30 phút +';
@@ -281,7 +286,7 @@ export class AttendanceListComponent implements OnInit {
         }
       } else {
         this.showToast('warning', 'Thông báo', 'Chưa đến giờ kết thúc');
-        this.showToast('warning', 'Thông báo', 'vui lòng chờ đến 17h30');
+        this.showToast('warning', 'Thông báo', 'Vui lòng chờ đến 17h30');
       }
     }
   }

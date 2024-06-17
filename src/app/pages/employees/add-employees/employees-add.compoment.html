@@ -50,12 +50,12 @@
 
       <div class="form-group">
         <label for="job_titleId">Công việc</label>
-        <select class="form-control" id="job_titleId" formControlName="job_title">
-          <option value="" disabled selected>Chọn công việc</option>
-          <option *ngFor="let job of jobList" [value]="job.title">
+        <nb-select fullWidth class="form-control col-lg-12" id="job_titleId" formControlName="job_title">
+          <nb-option value="" disabled selected>Chọn công việc</nb-option>
+          <nb-option *ngFor="let job of jobList" [value]="job.title">
             {{ job.title }}
-          </option>
-        </select>
+          </nb-option>
+        </nb-select>
         <div *ngIf="formEmployees.get('job_title').touched && formEmployees.get('job_title').invalid"
           class="text-danger">
           <div *ngIf="formEmployees.get('job_title').errors?.required">Vui lòng chọn công việc!!</div>

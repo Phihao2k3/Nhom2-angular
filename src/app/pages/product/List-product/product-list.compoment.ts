@@ -99,7 +99,7 @@ export class productlistComponent implements OnInit {
     private toastrService: NbToastrService,
     private Router: Router,
     private dialogService: NbDialogService
-  ) {} // Inject NbToastrService
+  ) { } // Inject NbToastrService
 
   ngOnInit(): void {
     this.getallProducts();
@@ -126,18 +126,18 @@ export class productlistComponent implements OnInit {
   }
   formatNumber(value) {
     if (!value) return '';
-    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ';
   }
 
   onDeleteConfirm(event): void {
     this.productService.deleteProduct(event.product_id).subscribe(
       (res) => {
-       
+
         this.getallProducts();
       },
       (err) => {
         this.showToast('danger', 'Thất bại', 'Xóa sản phẩm thất bại');
-        
+
       }
     );
   }

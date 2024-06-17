@@ -38,7 +38,7 @@ export class ChartjsPieComponent implements OnDestroy {
         const chartjs: any = config.variables.chartjs;
   
         this.data = {
-          labels: ['Đơn đã giao', 'Đơn hủy', 'Đang giao'],
+          labels: ['Đơn đã giao', 'Đơn hủy', 'Đang chờ xác nhận'],
           datasets: [
             {
               data: [this.odersuccess, this.odercancel, this.oderdelivering],
